@@ -1,0 +1,4 @@
+# This file ensures the generated/ directory is tracked by git
+# The generated HTML and text files will be created here by npm scripts
+# These generated files are ignored by .gitignore but this .gitkeep file ensures
+# the directory structure is preserved when cloning the repository

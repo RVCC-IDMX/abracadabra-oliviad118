@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ACME Corporation - Professional Business Solutions</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@300..700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles (two-mode theme: muted Acme by default, fun Farm/Cow in awesome-mode) -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- Shared header (hidden in awesome-mode) -->
+    <header class="site-header">
+        <div class="container">
+            <h1 class="site-title" id="main-title">ACME Corporation</h1>
+            <nav class="nav" aria-label="Primary">
+                <a href="#about" aria-current="page">About</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- =====================================================
+         1) BORING / MUTED "ACME" VIEW (default when file://)
+         ===================================================== -->
+        <div class="boring">
+            <div class="container">
+                <section class="hero">
+                    <h2>Professional Business Solutions for the Modern Enterprise</h2>
+                    <p>
+                        Leveraging synergistic paradigms to optimize your business outcomes through innovative
+                        methodologies and scalable frameworks.
+                    </p>
+                </section>
+                <section id="loading-state" class="section">
+                    <h3>Important Updates</h3>
+                    <div id="boring-placeholder" class="card">
+                        <p class="loading-message">Loading important company announcements…</p>
+                        <div aria-hidden="true">…</div>
+                    </div>
+                </section>
+                <section id="about" class="section">
+                    <h3>About Our Company</h3>
+                    <div class="card">
+                        <p>ACME Corporation has been providing enterprise-grade solutions since 1987. Our commitment to
+                            excellence and attention to detail ensures that your business requirements are met with the
+                            highest standards of professionalism.</p>
+                        <p>We specialize in comprehensive business optimization strategies that deliver measurable
+                            results through proven methodologies and industry best practices.</p>
+                    </div>
+                </section>
+
+                <section id="services" class="section">
+                    <h3>Our Services</h3>
+                    <div class="card">
+                        <ul>
+                            <li>Strategic Business Consulting</li>
+                            <li>Process Optimization</li>
+                            <li>Enterprise Resource Planning</li>
+                            <li>Workflow Management Systems</li>
+                            <li>Performance Analytics</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="contact" class="section">
+                    <h3>Contact Information</h3>
+                    <address class="contact">
+                        ACME Corporation<br>
+                        123 Business Park Drive<br>
+                        Corporate City, CC 12345<br>
+                        Phone: (555) 123-4567<br>
+                        Email: <a href="mailto:info@acmecorp.com">info@acmecorp.com</a>
+                    </address>
+                </section>
+
+
+            </div>
+        </div>
+
+        <!-- =====================================================
+         2) Abracadabra Cow! (fun farmstand)
+         Hidden by default; shown when magic.js detects :3000
+         and adds body.awesome-mode. Content is injected into
+         #content-placeholder by runtime code from `npm run generate`.
+         ===================================================== -->
+        <section id="magic-content" class="special-section" aria-live="polite" style="display:none">
+            <h3>Abracadabra Cow!</h3>
+            <div id="content-placeholder"><!-- dynamic cowsay/sections injected here --></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; <span id="year"></span> ACME Corporation. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/magic.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const y = document.getElementById('year');
+            if (y) y.textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+
+</html>

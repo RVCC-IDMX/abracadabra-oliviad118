@@ -1,0 +1,419 @@
+/* =========================================================
+   Two-in-One Theme
+   - Default (file:// or wrong port): muted Acme
+   - Server on :3000 => JS adds body.awesome-mode (Abracadabra Cow!)
+     clean shapes, accessible contrast, mobile-first
+   ========================================================= */
+
+/* --------- Design Tokens --------- */
+:root {
+    /* Shared neutrals */
+    --ink-900: #1f2937;
+    /* primary text */
+    --ink-700: #334155;
+    /* secondary */
+    --ink-400: #94a3b8;
+    /* subtle lines */
+    --white: #ffffff;
+
+    /* Acme (muted) */
+    --acme-bg: #f7f7f7;
+    --acme-panel: #f0f2f5;
+    --acme-border: #e5e7eb;
+    --acme-accent: #475569;
+
+    /* Abracadabra Cow! (fun farmstand) — flat, no gradients */
+    --farm-cream: #fff7e6;
+    --farm-green-900: #214f2b;
+    --farm-green-700: #2f6d3a;
+    --farm-green-600: #3c7d46;
+    --farm-green-100: #e7f2e8;
+    --farm-sage-600: #5f8d4e;
+    --farm-sage-200: #c7e1cc;
+    --farm-tomato: #d4573b;
+    --farm-gold: #d6a400;
+
+    /* Radius & spacing */
+    --r-sm: 8px;
+    --r-md: 12px;
+    --r-lg: 16px;
+    --sp-1: .5rem;
+    --sp-2: .75rem;
+    --sp-3: 1rem;
+    --sp-4: 1.5rem;
+    --sp-6: 2rem;
+    --sp-8: 3rem;
+
+    --maxw: 72ch;
+
+    /* Fonts (load Fraunces + Inter in <head>) */
+    --heading: "Fraunces", ui-serif, Georgia, serif;
+    --body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+/* --------- Base / Reset-ish --------- */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    color-scheme: light;
+}
+
+body {
+    margin: 0;
+    font-family: var(--body);
+    color: var(--ink-900);
+    background: var(--acme-bg);
+    /* default: Acme */
+    line-height: 1.6;
+}
+
+img,
+svg,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+main {
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding: var(--sp-4) var(--sp-3);
+}
+
+a {
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+:focus-visible {
+    outline: 3px solid var(--farm-tomato);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* --------- Layout helpers --------- */
+.container {
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding: 0 var(--sp-3);
+}
+
+/* =========================================================
+   1) ACME (default, muted)
+   ========================================================= */
+
+header.site-header {
+    background: var(--acme-panel);
+    border-bottom: 1px solid var(--acme-border);
+}
+
+.site-header .container {
+    padding: var(--sp-3) 0;
+}
+
+.site-title {
+    font: 600 clamp(1.25rem, 1rem + 1vw, 1.75rem)/1 var(--body);
+    color: var(--acme-accent);
+    margin: 0;
+}
+
+.nav {
+    display: flex;
+    gap: var(--sp-2);
+    margin-top: var(--sp-2);
+}
+
+.nav a {
+    text-decoration: none;
+    color: var(--ink-700);
+    padding: .3rem .6rem;
+    border: 1px solid var(--acme-border);
+    border-radius: var(--r-sm);
+    background: var(--white);
+}
+
+.nav a[aria-current="page"] {
+    border-color: var(--ink-400);
+    font-weight: 600;
+}
+
+.hero {
+    background: var(--acme-panel);
+    border: 1px solid var(--acme-border);
+    border-radius: var(--r-md);
+    padding: var(--sp-6);
+    margin-block: var(--sp-4);
+}
+
+.hero h1 {
+    margin: 0 0 var(--sp-2);
+    font: 700 clamp(1.5rem, 1rem + 2vw, 2.25rem)/1.2 var(--body);
+    color: var(--acme-accent);
+}
+
+.hero p {
+    color: var(--ink-700);
+    max-width: 60ch;
+}
+
+.section {
+    margin-block: var(--sp-6);
+}
+
+.section h3 {
+    font: 600 1.125rem/1.3 var(--body);
+    color: var(--acme-accent);
+    border-left: 4px solid var(--ink-400);
+    padding-left: .6rem;
+    margin: 0 0 var(--sp-2);
+}
+
+.card {
+    background: var(--white);
+    border: 1px solid var(--acme-border);
+    border-radius: var(--r-md);
+    padding: var(--sp-4);
+}
+
+address.contact {
+    font-style: normal;
+    background: var(--white);
+    border: 1px solid var(--acme-border);
+    border-radius: var(--r-md);
+    padding: var(--sp-4);
+    color: var(--ink-700);
+}
+
+footer.site-footer {
+    margin-top: var(--sp-8);
+    padding: var(--sp-4) 0;
+    color: var(--ink-700);
+    border-top: 1px solid var(--acme-border);
+    background: var(--acme-panel);
+    text-align: center;
+}
+
+/* Placeholders used by magic.js when not on :3000 */
+#boring-placeholder .status-message {
+    border: 1px solid var(--acme-border);
+    border-radius: var(--r-md);
+    padding: var(--sp-3);
+    background: var(--white);
+}
+
+.status-missing {
+    border-left: 6px solid #a78bfa;
+}
+
+.status-close {
+    border-left: 6px solid #f59e0b;
+}
+
+.status-generate {
+    border-left: 6px solid #22c55e;
+}
+
+/* Hidden by default: only appears when server is correct */
+#magic-content {
+    display: none;
+}
+
+/* =========================================================
+   2) Abracadabra Cow! (server on :3000)
+   body.awesome-mode is added by JS; we style a fun farmstand
+   ========================================================= */
+
+body.awesome-mode {
+    background: var(--farm-cream);
+    color: var(--ink-900);
+}
+
+/* Header: bold farm bar */
+body.awesome-mode header.site-header {
+    background: var(--farm-green-700);
+    border: 0;
+}
+
+body.awesome-mode .site-title {
+    font-family: var(--heading);
+    font-weight: 700;
+    color: var(--white);
+}
+
+body.awesome-mode .nav a {
+    background: var(--farm-sage-600);
+    color: var(--white);
+    border: 0;
+}
+
+body.awesome-mode .nav a:hover {
+    background: var(--farm-green-600);
+}
+
+body.awesome-mode .nav a[aria-current="page"] {
+    outline: 2px solid var(--farm-tomato);
+    outline-offset: 2px;
+}
+
+/* Hide Acme “boring” block & show magic content (JS also does this) */
+body.awesome-mode .boring {
+    display: none !important;
+}
+
+body.awesome-mode #magic-content {
+    display: block;
+}
+
+/* Hero celebration */
+body.awesome-mode .hero {
+    background: var(--farm-green-100);
+    border: 1px solid var(--farm-sage-200);
+    border-radius: var(--r-lg);
+    padding: var(--sp-6);
+}
+
+body.awesome-mode .hero h1 {
+    font-family: var(--heading);
+    font-weight: 700;
+    color: var(--farm-green-900);
+    font-size: clamp(2rem, 1.2rem + 2.2vw, 2.8rem);
+}
+
+body.awesome-mode .hero p {
+    color: var(--ink-900);
+}
+
+/* Section headings */
+body.awesome-mode .section h3,
+body.awesome-mode .cowsay-section h3,
+body.awesome-mode .cowsay-section h4 {
+    font-family: var(--heading);
+    color: var(--farm-green-700);
+    border: 0;
+    position: relative;
+    margin: 0 0 var(--sp-2);
+}
+
+body.awesome-mode .section h3::after,
+body.awesome-mode .cowsay-section h3::after {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 4px;
+    background: var(--farm-tomato);
+    border-radius: 2px;
+    margin-top: .35rem;
+}
+
+/* Cards & callouts */
+body.awesome-mode .card,
+body.awesome-mode .cowsay-content,
+body.awesome-mode .cowsay-celebration {
+    background: var(--white);
+    border: 1px solid var(--farm-sage-200);
+    border-radius: var(--r-md);
+    padding: var(--sp-4);
+}
+
+body.awesome-mode .cowsay-celebration {
+    background: var(--farm-green-100);
+}
+
+/* ASCII blocks */
+body.awesome-mode .cowsay-ascii {
+    background: #0b1f12;
+    /* very dark green */
+    color: #bbf7d0;
+    /* pea green text */
+    border: 1px solid #1b3a22;
+    border-radius: var(--r-md);
+    padding: var(--sp-3);
+    font: 14px/1.45 var(--mono);
+    overflow-x: auto;
+}
+
+/* Badges (for “What you learned” checks, etc.) */
+body.awesome-mode .badge {
+    display: inline-block;
+    padding: .2rem .6rem;
+    border: 1px solid var(--farm-sage-200);
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--farm-tomato);
+    font-weight: 700;
+    font-size: .85rem;
+}
+
+/* Lists */
+ul {
+    padding-left: 1.25rem;
+}
+
+li {
+    margin-block: .35rem;
+}
+
+/* Footer (farm) */
+body.awesome-mode footer.site-footer {
+    background: var(--farm-green-700);
+    color: var(--white);
+    border: 0;
+}
+
+body.awesome-mode footer .container {
+    padding: var(--sp-3) 0;
+}
+
+/* Utility borders used in the layout */
+.rule {
+    height: 1px;
+    background: var(--ink-400);
+    border: 0;
+    margin-block: var(--sp-4);
+}
+
+body.awesome-mode .rule {
+    background: var(--farm-sage-200);
+}
+
+/* Make sure any “Awesome mode” legacy glow styles are neutralized */
+.awesome-glow,
+.awesome-panel,
+.awesome-shadow {
+    box-shadow: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    text-shadow: none !important;
+    background-image: none !important;
+}
+
+/* Sparkle container safety (JS injects ✨ with absolute positioning) */
+#magic-content {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Responsive tweaks */
+@media (min-width: 680px) {
+    .nav {
+        justify-content: flex-start;
+    }
+
+    .hero {
+        padding: var(--sp-8);
+    }
+
+}
+

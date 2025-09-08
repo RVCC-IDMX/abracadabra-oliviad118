@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+File: /docs/troubleshooting.html
+Owner: Cynthia
+Project: Abracadabra
+Created: 2025-09-06
+Duration: 25 min
+Notes: Comprehensive debugging and troubleshooting guide for common development issues
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troubleshooting - Abracadabra Tutorial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@300..700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="tutorial-styles.css">
+</head>
+
+<body>
+    <main class="tutorial-content">
+        <header class="tutorial-header">
+            <h1>🔧 Troubleshooting</h1>
+            <p class="tutorial-subtitle">Solving common issues and debugging like a pro</p>
+        </header>
+
+        <div class="quick-access">
+            <h2>Quick access</h2>
+            <div class="quick-links">
+                <a href="#skill-expectations" class="quick-link">
+                    <span class="quick-icon">🎯</span>
+                    <span class="quick-text">Skills</span>
+                </a>
+                <a href="#tldr" class="quick-link">
+                    <span class="quick-icon">⚡</span>
+                    <span class="quick-text">TL;DR Summary</span>
+                </a>
+                <a href="#ai-helper" class="quick-link">
+                    <span class="quick-icon">🤖</span>
+                    <span class="quick-text">AI Helper</span>
+                </a>
+            </div>
+        </div>
+
+        <section id="skill-expectations" class="skill-expectations">
+            <h2>Skill expectations</h2>
+            <div class="skills-overview">
+                <div class="assumed-skills">
+                    <h3>Assumed you know</h3>
+                    <ul>
+                        <li>Basic command line navigation and file operations</li>
+                        <li>Understanding of npm install and package.json basics</li>
+                        <li>Experience with VS Code terminal and file explorer</li>
+                        <li>Basic knowledge of development servers and ports</li>
+                    </ul>
+                </div>
+                <div class="focused-skills">
+                    <h3>You'll learn here</h3>
+                    <ul>
+                        <li>Systematic debugging approaches and methodologies</li>
+                        <li>Interpret and resolve common error messages</li>
+                        <li>Troubleshoot npm, server, and file-related issues</li>
+                        <li>Use debugging tools and techniques effectively</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <nav class="tutorial-toc">
+            <h2>Table of contents</h2>
+            <ul>
+                <li><a href="#tldr">TL;DR</a></li>
+                <li><a href="#debugging-mindset">Debugging mindset</a></li>
+                <li><a href="#npm-issues">npm and package issues</a></li>
+                <li><a href="#json-problems">JSON syntax problems</a></li>
+                <li><a href="#server-issues">Server and port issues</a></li>
+                <li><a href="#file-issues">File and path issues</a></li>
+                <li><a href="#magic-not-working">Magic not working</a></li>
+                <li><a href="#general-strategies">General debugging strategies</a></li>
+                <li><a href="#ai-helper">AI Helper</a></li>
+            </ul>
+        </nav>
+
+        <section id="tldr" class="tldr-section">
+            <h2>TL;DR</h2>
+            <div class="tldr-content">
+                <h3>Debugging is a systematic skill</h3>
+                <p>Successful debugging isn't magic—it's a methodical approach of reading error messages, forming hypotheses, and testing solutions. Most problems have clear symptoms that point to specific solutions.</p>
+                
+                <h3>Most common Abracadabra issues</h3>
+                <div class="concept-box">
+                    <h4>🎯 Top 5 problems and solutions</h4>
+                    <ul>
+                        <li><strong>Command not found</strong> → Check package.json scripts and run <code>npm install</code></li>
+                        <li><strong>Port already in use</strong> → Change ports or kill existing processes</li>
+                        <li><strong>JSON syntax errors</strong> → Missing commas, trailing commas, or quote issues</li>
+                        <li><strong>Magic not working</strong> → Verify you're using port 3000 and localhost</li>
+                        <li><strong>Files not found</strong> → Check file paths and directory structure</li>
+                    </ul>
+                </div>
+                
+                <h3>Universal debugging strategy</h3>
+                <ol>
+                    <li><strong>Read the error message completely</strong> - Don't skip details</li>
+                    <li><strong>Identify the exact command that failed</strong> - What were you trying to do?</li>
+                    <li><strong>Check the basics first</strong> - Files exist? Commands spelled correctly?</li>
+                    <li><strong>Test components individually</strong> - Break complex problems into parts</li>
+                    <li><strong>Search for the exact error message</strong> - Others have solved this</li>
+                </ol>
+                
+                <div class="warning-box">
+                    <h4>⚠️ Debugging mindset shift</h4>
+                    <p>Errors are <strong>information</strong>, not failures. Each error message is a clue telling you exactly what needs to be fixed. Professional developers debug constantly—it's a core skill, not a sign of problems.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="debugging-mindset">
+            <h2>Debugging mindset</h2>
+
+            <div class="concept-box">
+                <h4>🎯 Key concept</h4>
+                <p><strong>Debugging</strong> is like being a detective. You gather clues (error messages, symptoms),
+                    form hypotheses, and test them systematically until you find the root cause.</p>
+            </div>
+
+            <h3>Professional debugging approach</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">The debugging process</h4>
+                <ol>
+                    <li><strong>Read the error</strong>: Error messages usually tell you exactly what's wrong</li>
+                    <li><strong>Understand the context</strong>: What were you doing when it broke?</li>
+                    <li><strong>Isolate the problem</strong>: Test parts of your system individually</li>
+                    <li><strong>Check the basics</strong>: Verify assumptions (file paths, spelling, syntax)</li>
+                    <li><strong>Search for solutions</strong>: Google the exact error message</li>
+                    <li><strong>Try one fix at a time</strong>: Don't change multiple things simultaneously</li>
+                    <li><strong>Document what works</strong>: Remember solutions for next time</li>
+                </ol>
+            </div>
+
+            <div class="concept-box">
+                <h4>💡 Error messages are your friends</h4>
+                <p>Don't fear error messages! They're trying to help you. Most errors tell you exactly what's wrong and
+                    often suggest how to fix it. Learn to read them carefully.</p>
+            </div>
+
+            <h3>Common beginner mistakes</h3>
+            <ul>
+                <li><strong>Ignoring error messages</strong>: Skipping the valuable information they provide</li>
+                <li><strong>Changing everything at once</strong>: Making it impossible to know what fixed the problem
+                </li>
+                <li><strong>Not checking basics</strong>: Overlooking simple issues like typos or file paths</li>
+                <li><strong>Giving up too quickly</strong>: Most problems have simple solutions</li>
+                <li><strong>Not asking for help</strong>: Struggling alone instead of using resources</li>
+            </ul>
+
+            <h3>Building debugging confidence</h3>
+
+            <div class="success-box">
+                <h4>✅ Remember</h4>
+                <p>Every experienced developer has faced the same problems you're encountering. Debugging skills improve
+                    with practice, and each problem you solve makes you better at solving the next one.</p>
+            </div>
+        </section>
+
+        <section id="npm-issues">
+            <h2>npm and package issues</h2>
+
+            <h3>Installation problems</h3>
+
+            <div class="warning-box">
+                <h4>❌ npm install fails</h4>
+                <p><strong>Error examples</strong>:</p>
+                <ul>
+                    <li>"EACCES: permission denied"</li>
+                    <li>"npm ERR! code ENOENT"</li>
+                    <li>"gyp ERR! stack Error: not found: make"</li>
+                </ul>
+                <p><strong>Solutions to try</strong>:</p>
+                <ol>
+                    <li>Delete <code>node_modules</code> folder and <code>package-lock.json</code></li>
+                    <li>Run <code>npm cache clean --force</code></li>
+                    <li>Run <code>npm install</code> again</li>
+                    <li>If still failing, try <code>npm install --legacy-peer-deps</code></li>
+                </ol>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ Command not found</h4>
+                <p><strong>Error</strong>: "cowsay: command not found" or "http-server: command not found"</p>
+                <p><strong>Cause</strong>: Package not installed or npm not finding it</p>
+                <p><strong>Solutions</strong>:</p>
+                <ol>
+                    <li>Check if package is listed: <code>npm ls cowsay</code></li>
+                    <li>Install missing package: <code>npm install --save-dev cowsay</code></li>
+                    <li>Verify you're in the right directory: <code>pwd</code></li>
+                    <li>Run through npm script: <code>npm run generate</code> instead of direct command</li>
+                </ol>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ npm run command fails</h4>
+                <p><strong>Error</strong>: "npm ERR! missing script: serve"</p>
+                <p><strong>Cause</strong>: Script not defined in package.json</p>
+                <p><strong>Solutions</strong>:</p>
+                <ol>
+                    <li>Check script names: <code>npm run</code> (lists all available scripts)</li>
+                    <li>Verify spelling in package.json</li>
+                    <li>Check for JSON syntax errors</li>
+                    <li>Ensure commas are correct between scripts</li>
+                </ol>
+            </div>
+
+            <h3>Version conflicts</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Checking versions</h4>
+                <pre><code># Check npm version
+npm --version
+
+# Check Node.js version
+node --version
+
+# Check specific package version
+npm ls http-server</code></pre>
+                <p>Version mismatches can cause compatibility issues</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Fresh install (nuclear option)</h4>
+                <pre><code># Delete all installed packages
+rm -rf node_modules package-lock.json
+
+# Clear npm cache
+npm cache clean --force
+
+# Reinstall everything
+npm install</code></pre>
+                <p><strong>When to use</strong>: When nothing else works and you suspect corrupted dependencies</p>
+            </div>
+
+            <h3>Permission issues</h3>
+
+            <div class="warning-box">
+                <h4>⚠️ Never use sudo with npm</h4>
+                <p>If you get permission errors, <strong>don't use sudo</strong>. This can cause security issues and
+                    break your npm installation.</p>
+                <p><strong>Better solution</strong>: Configure npm to use a different directory or use nvm (Node Version
+                    Manager)</p>
+            </div>
+        </section>
+
+        <section id="json-problems">
+            <h2>JSON syntax problems</h2>
+
+            <p>JSON (JavaScript Object Notation) is very strict about syntax. Small mistakes break everything.</p>
+
+            <h3>Common JSON errors</h3>
+
+            <div class="warning-box">
+                <h4>❌ Missing commas</h4>
+                <p><strong>Broken</strong>:</p>
+                <pre><code>{
+  "name": "my-project"
+  "version": "1.0.0"
+}</code></pre>
+                <p><strong>Fixed</strong>:</p>
+                <pre><code>{
+  "name": "my-project",
+  "version": "1.0.0"
+}</code></pre>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ Trailing commas</h4>
+                <p><strong>Broken</strong>:</p>
+                <pre><code>{
+  "scripts": {
+    "serve": "http-server -p 3000 -o",
+    "generate": "cowsay hello > welcome.txt",
+  }
+}</code></pre>
+                <p><strong>Fixed</strong>:</p>
+                <pre><code>{
+  "scripts": {
+    "serve": "http-server -p 3000 -o",
+    "generate": "cowsay hello > welcome.txt"
+  }
+}</code></pre>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ Wrong quote types</h4>
+                <p><strong>Broken</strong>:</p>
+                <pre><code>{
+  'name': 'my-project',
+  "version": "1.0.0"
+}</code></pre>
+                <p><strong>Fixed</strong>:</p>
+                <pre><code>{
+  "name": "my-project",
+  "version": "1.0.0"
+}</code></pre>
+                <p><strong>Rule</strong>: Always use double quotes, never single quotes</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ Unescaped quotes in strings</h4>
+                <p><strong>Broken</strong>:</p>
+                <pre><code>{
+  "generate": "cowsay "Hello World" > welcome.txt"
+}</code></pre>
+                <p><strong>Fixed</strong>:</p>
+                <pre><code>{
+  "generate": "cowsay 'Hello World' > welcome.txt"
+}</code></pre>
+                <p><strong>Solution</strong>: Use single quotes inside double-quoted strings</p>
+            </div>
+
+            <h3>JSON validation tools</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">VS Code validation</h4>
+                <ul>
+                    <li><strong>Red squiggly lines</strong>: Indicate JSON syntax errors</li>
+                    <li><strong>Hover over errors</strong>: See specific error messages</li>
+                    <li><strong>Problems panel</strong>: View → Problems shows all errors</li>
+                    <li><strong>Auto-formatting</strong>: Shift+Alt+F formats JSON correctly</li>
+                </ul>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Online validators</h4>
+                <ul>
+                    <li><strong>JSONLint.com</strong>: Paste JSON and get detailed error info</li>
+                    <li><strong>JSON Formatter</strong>: Various online tools available</li>
+                    <li><strong>Command line</strong>:
+                        <code>node -e "JSON.parse(require('fs').readFileSync('package.json'))"</code></li>
+                </ul>
+            </div>
+
+            <h3>Preventing JSON errors</h3>
+
+            <div class="concept-box">
+                <h4>💡 JSON editing tips</h4>
+                <ul>
+                    <li><strong>Use VS Code</strong>: Built-in validation catches errors immediately</li>
+                    <li><strong>Copy existing patterns</strong>: When adding new scripts, copy the format</li>
+                    <li><strong>Validate frequently</strong>: Don't wait until the end to check syntax</li>
+                    <li><strong>Use extensions</strong>: JSON-related VS Code extensions can help</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="server-issues">
+            <h2>Server and port issues</h2>
+
+            <h3>Port conflicts</h3>
+
+            <div class="warning-box">
+                <h4>❌ Port already in use</h4>
+                <p><strong>Error</strong>: "EADDRINUSE: address already in use :::3000"</p>
+                <p><strong>Cause</strong>: Another process is using port 3000</p>
+                <p><strong>Solutions</strong>:</p>
+
+                <div class="interactive-demo">
+                    <h4 class="demo-title">Find what's using the port</h4>
+                    <pre><code># On Mac/Linux:
+lsof -i :3000
+
+# On Windows:
+netstat -ano | findstr :3000</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h4 class="demo-title">Kill the process</h4>
+                    <pre><code># On Mac/Linux:
+lsof -ti:3000 | xargs kill
+
+# On Windows (replace PID with actual process ID):
+taskkill /PID [process_id] /F</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h4 class="demo-title">Use a different port temporarily</h4>
+                    <pre><code># Use port 3001 instead
+http-server -p 3001 -o</code></pre>
+                    <p><strong>Note</strong>: Abracadabra magic only works on port 3000</p>
+                </div>
+            </div>
+
+            <h3>Server startup problems</h3>
+
+            <div class="warning-box">
+                <h4>❌ Server starts but can't connect</h4>
+                <p><strong>Symptoms</strong>:</p>
+                <ul>
+                    <li>Terminal shows "Server running at..."</li>
+                    <li>Browser shows "This site can't be reached"</li>
+                    <li>Connection timeout errors</li>
+                </ul>
+                <p><strong>Solutions</strong>:</p>
+                <ol>
+                    <li>Check the exact URL: <code>http://localhost:3000</code> (not <code>https</code>)</li>
+                    <li>Try <code>127.0.0.1:3000</code> instead of <code>localhost:3000</code></li>
+                    <li>Disable VPN if using one</li>
+                    <li>Check Windows Defender/firewall settings</li>
+                    <li>Try a different browser</li>
+                </ol>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ 404 errors for files</h4>
+                <p><strong>Problem</strong>: Server runs but CSS, JS, or image files show 404</p>
+                <p><strong>Debugging steps</strong>:</p>
+                <ol>
+                    <li>Check file paths in HTML are correct</li>
+                    <li>Verify files exist in expected locations</li>
+                    <li>Check for typos in filenames</li>
+                    <li>Ensure server is running from correct directory</li>
+                    <li>Look at browser network tab to see failed requests</li>
+                </ol>
+            </div>
+
+            <h3>Browser caching issues</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Force refresh</h4>
+                <ul>
+                    <li><strong>Hard refresh</strong>: Ctrl+F5 or Ctrl+Shift+R</li>
+                    <li><strong>Disable cache</strong>: Open DevTools, check "Disable cache"</li>
+                    <li><strong>Incognito mode</strong>: Opens with fresh cache</li>
+                    <li><strong>Clear browser data</strong>: Settings → Privacy → Clear browsing data</li>
+                </ul>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Server-side cache control</h4>
+                <pre><code># Disable caching on http-server
+http-server -p 3000 -o -c-1
+
+# The -c-1 flag disables caching</code></pre>
+            </div>
+        </section>
+
+        <section id="file-issues">
+            <h2>File and path issues</h2>
+
+            <h3>Common file problems</h3>
+
+            <div class="warning-box">
+                <h4>❌ File not found</h4>
+                <p><strong>Error examples</strong>:</p>
+                <ul>
+                    <li>"ENOENT: no such file or directory"</li>
+                    <li>"Cannot read property of undefined"</li>
+                    <li>"404 Not Found" in browser</li>
+                </ul>
+                <p><strong>Debugging checklist</strong>:</p>
+                <ol>
+                    <li><strong>Verify file exists</strong>: Use file explorer or <code>ls</code></li>
+                    <li><strong>Check spelling</strong>: Filenames are case-sensitive</li>
+                    <li><strong>Verify path</strong>: Relative to current directory</li>
+                    <li><strong>Check permissions</strong>: Ensure files are readable</li>
+                </ol>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Path debugging commands</h4>
+                <pre><code># See current directory
+pwd
+
+# List files in current directory
+ls -la
+
+# Check if specific file exists
+ls -la package.json
+
+# Show file tree structure
+tree -a -I node_modules</code></pre>
+            </div>
+
+            <h3>Directory structure problems</h3>
+
+            <div class="warning-box">
+                <h4>❌ Wrong working directory</h4>
+                <p><strong>Problem</strong>: Commands fail because you're in the wrong folder</p>
+                <p><strong>Symptoms</strong>:</p>
+                <ul>
+                    <li>package.json not found</li>
+                    <li>npm commands don't work</li>
+                    <li>Can't find project files</li>
+                </ul>
+                <p><strong>Solution</strong>:</p>
+                <ol>
+                    <li>Close VS Code completely</li>
+                    <li>Navigate to your project folder in file explorer</li>
+                    <li>Right-click → "Open with Code"</li>
+                    <li>Open terminal in VS Code</li>
+                    <li>Verify location with <code>pwd</code></li>
+                </ol>
+            </div>
+
+            <h3>Generated content issues</h3>
+
+            <div class="warning-box">
+                <h4>❌ Generated folder missing</h4>
+                <p><strong>Problem</strong>: <code>npm run generate</code> fails because generated/ folder doesn't exist
+                </p>
+                <p><strong>Solution</strong>:</p>
+                <pre><code># Create the directory first
+mkdir generated
+
+# Then run generation
+npm run generate</code></pre>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ Generated files are empty or wrong</h4>
+                <p><strong>Debugging steps</strong>:</p>
+                <ol>
+                    <li>Check if cowsay is installed: <code>npm ls cowsay</code></li>
+                    <li>Test cowsay directly: <code>npx cowsay "test message"</code></li>
+                    <li>Check script syntax in package.json</li>
+                    <li>Look for error messages during generation</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="magic-not-working">
+            <h2>Magic not working</h2>
+
+            <p>When the Abracadabra magic doesn't activate, here's how to debug it:</p>
+
+            <h3>Port 3000 requirements</h3>
+
+            <div class="warning-box">
+                <h4>❌ Still seeing ACME content</h4>
+                <p><strong>Most common cause</strong>: Not using port 3000</p>
+                <p><strong>Verification steps</strong>:</p>
+                <ol>
+                    <li>Check URL bar: Should show <code>localhost:3000</code></li>
+                    <li>Check terminal output: Should mention port 3000</li>
+                    <li>Use correct command: <code>npm run serve</code> (not <code>npm run start</code>)</li>
+                </ol>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Debug the port detection</h4>
+                <ol>
+                    <li>Open browser developer tools (F12)</li>
+                    <li>Go to Console tab</li>
+                    <li>Look for messages about port detection</li>
+                    <li>Check if JavaScript is running correctly</li>
+                </ol>
+            </div>
+
+            <h3>Content generation issues</h3>
+
+            <div class="warning-box">
+                <h4>❌ Magic activates but content is broken</h4>
+                <p><strong>Possible causes</strong>:</p>
+                <ul>
+                    <li>Generated files are empty</li>
+                    <li>Build script didn't run properly</li>
+                    <li>Files have wrong content</li>
+                </ul>
+                <p><strong>Solutions</strong>:</p>
+                <ol>
+                    <li>Run generation step separately: <code>npm run generate</code></li>
+                    <li>Check generated/ folder contents</li>
+                    <li>Look for error messages during generation</li>
+                    <li>Verify cowsay is working: <code>npx cowsay "test"</code></li>
+                </ol>
+            </div>
+
+            <h3>JavaScript errors</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Check for JavaScript errors</h4>
+                <ol>
+                    <li>Open Developer Tools (F12)</li>
+                    <li>Go to Console tab</li>
+                    <li>Look for red error messages</li>
+                    <li>Check Network tab for failed file loads</li>
+                    <li>Refresh page and watch for errors</li>
+                </ol>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ JavaScript not loading</h4>
+                <p><strong>Check these common issues</strong>:</p>
+                <ul>
+                    <li>Script tag has correct path to magic.js</li>
+                    <li>magic.js file exists and isn't empty</li>
+                    <li>No syntax errors in the JavaScript</li>
+                    <li>Server is serving JS files (check Network tab)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="general-strategies">
+            <h2>General debugging strategies</h2>
+
+            <h3>Systematic debugging approach</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">The isolation technique</h4>
+                <ol>
+                    <li><strong>Test each step individually</strong>:
+                        <ul>
+                            <li>Does <code>npm run generate</code> work by itself?</li>
+                            <li>Does <code>npm run serve</code> work by itself?</li>
+                            <li>Are generated files created correctly?</li>
+                        </ul>
+                    </li>
+                    <li><strong>Start with the basics</strong>:
+                        <ul>
+                            <li>Are you in the right directory?</li>
+                            <li>Are dependencies installed?</li>
+                            <li>Is the syntax correct?</li>
+                        </ul>
+                    </li>
+                    <li><strong>Work backwards from the error</strong>:
+                        <ul>
+                            <li>What was the last thing that worked?</li>
+                            <li>What changed between working and broken?</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <h3>Information gathering</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Collect debugging information</h4>
+                <pre><code># System information
+node --version
+npm --version
+
+# Project information
+pwd
+ls -la
+npm run
+
+# Check for errors
+npm run generate
+npm run serve</code></pre>
+                <p>This information is helpful when asking for help</p>
+            </div>
+
+            <h3>Using help resources effectively</h3>
+
+            <div class="concept-box">
+                <h4>💡 How to ask for help</h4>
+                <ol>
+                    <li><strong>Include the full error message</strong>: Copy/paste exactly what you see</li>
+                    <li><strong>Describe what you were doing</strong>: Context helps identify the problem</li>
+                    <li><strong>Show what you tried</strong>: Demonstrate your debugging efforts</li>
+                    <li><strong>Include relevant code</strong>: package.json, command output, etc.</li>
+                    <li><strong>Mention your environment</strong>: OS, Node version, etc.</li>
+                </ol>
+            </div>
+
+            <h3>Prevention strategies</h3>
+
+            <div class="success-box">
+                <h4>✅ Prevent problems before they happen</h4>
+                <ul>
+                    <li><strong>Save frequently</strong>: Use Ctrl+S often or enable auto-save</li>
+                    <li><strong>Test changes incrementally</strong>: Don't change everything at once</li>
+                    <li><strong>Use version control</strong>: Git helps you undo changes</li>
+                    <li><strong>Read documentation</strong>: Understanding tools prevents mistakes</li>
+                    <li><strong>Validate as you go</strong>: Don't wait until the end to test</li>
+                </ul>
+            </div>
+
+            <h3>Building debugging skills</h3>
+
+            <div class="concept-box">
+                <h4>🎯 Debugging is a learnable skill</h4>
+                <p>Every problem you solve makes you better at solving future problems. Keep notes about solutions that
+                    work - you'll likely encounter similar issues again.</p>
+            </div>
+
+            <ul>
+                <li><strong>Read error messages carefully</strong>: They often contain the solution</li>
+                <li><strong>Learn to use browser DevTools</strong>: Console, Network, Elements tabs</li>
+                <li><strong>Practice with small changes</strong>: Make one change at a time</li>
+                <li><strong>Understand your tools</strong>: Know how npm, VS Code, and browsers work</li>
+                <li><strong>Stay calm and methodical</strong>: Frustration leads to mistakes</li>
+            </ul>
+        </section>
+
+        <section class="next-steps">
+            <h2>Next steps</h2>
+            <p>Now that you have debugging skills, you're ready to:</p>
+            <ol>
+                <li>Confidently tackle problems as they arise</li>
+                <li>Help others with similar issues</li>
+                <li>Learn about <a href="evidence-guide.html">documenting your work and solutions</a></li>
+                <li>Apply these debugging skills to future projects</li>
+            </ol>
+
+            <div class="concept-box">
+                <h4>🎯 Practice exercise</h4>
+                <p>Intentionally break something small in your Abracadabra project (like adding a typo to package.json),
+                    then practice debugging it. This builds confidence in your problem-solving abilities.</p>
+            </div>
+        </section>
+
+        <section id="ai-helper" class="ai-helper-section">
+            <h2>AI helper - Troubleshooting</h2>
+
+            <div class="context-guidance">
+                <h3>💡 Getting better help with context</h3>
+                <div class="context-methods">
+                    <div class="method">
+                        <strong>File-capable AI (Claude Code, Copilot):</strong> Share your project files, terminal output, and error logs so AI can see the exact issue context.
+                    </div>
+                    <div class="method">
+                        <strong>Upload-capable AI (ChatGPT, Claude web):</strong> Upload screenshots of error messages, your file structure, and any configuration files showing the problem.
+                    </div>
+                    <div class="method">
+                        <strong>Text-only AI:</strong> Copy/paste complete error messages, describe what you were doing when the error occurred, and your system details.
+                    </div>
+                </div>
+                <p class="context-note">For debugging help, always include your operating system, Node.js version, exact command that failed, and complete error message—partial information leads to partial solutions.</p>
+            </div>
+
+            <div class="ai-categories">
+                <div class="ai-category" data-category="understanding">
+                    <h3>🧠 Understanding concepts</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="I'm working through the Abracadabra troubleshooting tutorial. Help me understand why reading error messages carefully is so important and how to interpret them effectively.">Copy</button>
+                            <p class="prompt-text">"I'm working through the Abracadabra troubleshooting tutorial. Help me understand why reading error messages carefully is so important and how to interpret them effectively."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Share any specific error messages you're struggling to understand</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="Explain the systematic approach to debugging and why it's better than random trial-and-error fixes.">Copy</button>
+                            <p class="prompt-text">"Explain the systematic approach to debugging and why it's better than random trial-and-error fixes."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Describe your current debugging approach and any challenges</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-category" data-category="troubleshooting">
+                    <h3>🔧 Troubleshooting specific problems</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="My Abracadabra project has this error and I've tried the basic troubleshooting steps. Here's what's happening and what I've attempted.">Copy</button>
+                            <p class="prompt-text">"My Abracadabra project has this error and I've tried the basic troubleshooting steps. Here's what's happening and what I've attempted."</p>
+                            <p class="context-hint">⚠️ <strong>Essential:</strong> Include complete error message, exact command that failed, and steps you've already tried</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="I'm getting a port/server error with my development server. Here are the details of what I'm trying to do and the exact error message.">Copy</button>
+                            <p class="prompt-text">"I'm getting a port/server error with my development server. Here are the details of what I'm trying to do and the exact error message."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Include the port you're trying to use and what other processes might be running</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="My Abracadabra magic isn't working even though I'm following the tutorial. Here's my setup and what I'm seeing vs what should happen.">Copy</button>
+                            <p class="prompt-text">"My Abracadabra magic isn't working even though I'm following the tutorial. Here's my setup and what I'm seeing vs what should happen."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Include which port you're using, your browser URL, and what you see on the page</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-category" data-category="prevention">
+                    <h3>🛡️ Prevention and best practices</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="Help me set up good debugging habits and preventive practices for my development workflow to avoid common issues.">Copy</button>
+                            <p class="prompt-text">"Help me set up good debugging habits and preventive practices for my development workflow to avoid common issues."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Describe your current development setup and any recurring problems</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="What are the most important debugging tools and techniques I should learn as I continue developing projects beyond Abracadabra?">Copy</button>
+                            <p class="prompt-text">"What are the most important debugging tools and techniques I should learn as I continue developing projects beyond Abracadabra?"</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Mention your development environment and future project goals</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/tutorial-nav.js"></script>
+    <script src="js/progress-tracker.js"></script>
+</body>
+
+</html>

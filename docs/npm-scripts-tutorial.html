@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+File: /docs/npm-scripts-tutorial.html
+Owner: Cynthia
+Project: Abracadabra
+Created: 2025-09-06
+Duration: 30 min
+Notes: Advanced automation and custom script development
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>npm Scripts Tutorial - Abracadabra Tutorial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@300..700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="tutorial-styles.css">
+</head>
+
+<body>
+    <main class="tutorial-content">
+        <header class="tutorial-header">
+            <h1>⚙️ npm Scripts tutorial</h1>
+            <p class="tutorial-subtitle">Mastering custom commands and automation workflows</p>
+        </header>
+
+        <div class="quick-access">
+            <h2>Quick access</h2>
+            <div class="quick-links">
+                <a href="#skill-expectations" class="quick-link">
+                    <span class="quick-icon">🎯</span>
+                    <span class="quick-text">Skills</span>
+                </a>
+                <a href="#tldr" class="quick-link">
+                    <span class="quick-icon">⚡</span>
+                    <span class="quick-text">TL;DR Summary</span>
+                </a>
+                <a href="#ai-helper" class="quick-link">
+                    <span class="quick-icon">🤖</span>
+                    <span class="quick-text">AI Helper</span>
+                </a>
+            </div>
+        </div>
+
+        <section id="skill-expectations" class="skill-expectations">
+            <h2>Skill expectations</h2>
+            <div class="skills-overview">
+                <div class="assumed-skills">
+                    <h3>Assumed you know</h3>
+                    <ul>
+                        <li>Execute npm install to set up project dependencies</li>
+                        <li>Read and interpret package.json scripts section</li>
+                        <li>Start development server and navigate to localhost</li>
+                        <li>Use VS Code integrated terminal</li>
+                    </ul>
+                </div>
+                <div class="focused-skills">
+                    <h3>You'll learn here</h3>
+                    <ul>
+                        <li>Create custom npm scripts for project automation</li>
+                        <li>Chain multiple commands in npm scripts</li>
+                        <li>Use script variables and cross-platform commands</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <nav class="tutorial-toc">
+            <h2>Table of contents</h2>
+            <ul>
+                <li><a href="#tldr">TL;DR</a></li>
+                <li><a href="#what-are-scripts">What are npm scripts?</a></li>
+                <li><a href="#abracadabra-scripts">Abracadabra scripts explained</a></li>
+                <li><a href="#script-syntax">Script syntax and features</a></li>
+                <li><a href="#chaining-scripts">Chaining and combining scripts</a></li>
+                <li><a href="#advanced-patterns">Advanced script patterns</a></li>
+                <li><a href="#troubleshooting">Troubleshooting scripts</a></li>
+                <li><a href="#ai-helper">AI Helper</a></li>
+            </ul>
+        </nav>
+
+        <section id="tldr" class="tldr-section">
+            <h2>TL;DR</h2>
+            <div class="tldr-content">
+                <h3>npm scripts purpose and power</h3>
+                <p>npm scripts are shortcuts that let you run complex commands with simple names. Instead of typing
+                    <code>node scripts/build-content.js && http-server -p 3000 -o</code>, you just type
+                    <code>npm run dev</code>.</p>
+
+                <h3>Abracadabra project automation</h3>
+                <div class="concept-box">
+                    <h4>🎯 Core Abracadabra scripts</h4>
+                    <ul>
+                        <li><code>npm run generate</code> - Creates ASCII art content with cowsay</li>
+                        <li><code>npm run serve</code> - Starts http-server on port 3000</li>
+                        <li><code>npm run dev</code> - Combines generate + serve for complete workflow</li>
+                    </ul>
+                </div>
+
+                <h3>Custom script creation</h3>
+                <p>Scripts go in the <code>"scripts"</code> section of package.json. You can chain commands with
+                    <code>&&</code>, run them in parallel with <code>&</code>, and use npm variables like
+                    <code>$npm_package_version</code>.</p>
+
+                <div class="warning-box">
+                    <h4>⚠️ Common gotcha</h4>
+                    <p>Scripts run from your project root, not the scripts folder. Use
+                        <code>node scripts/filename.js</code>, not just <code>node filename.js</code>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="what-are-scripts">
+            <h2>What are npm scripts?</h2>
+
+            <div class="concept-box">
+                <h4>🎯 Key concept</h4>
+                <p><strong>npm scripts</strong> are custom commands defined in your package.json that automate common
+                    development tasks. They're like shortcuts for complex command sequences.</p>
+            </div>
+
+            <p>Instead of remembering and typing long, complex commands, you create simple shortcuts:</p>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Before scripts (the hard way)</h4>
+                <pre><code># Every time you want to build and serve:
+cowsay 'Welcome to the most AWESOME website ever!' > generated/welcome.txt
+cowsay -f dragon 'I am the guardian of this amazing site!' > generated/dragon.txt
+cowsay -f tux 'Development tools make coding awesome!' > generated/tux.txt
+node scripts/build-content.js
+http-server -p 3000 -o</code></pre>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">With scripts (the easy way)</h4>
+                <pre><code># Simple, memorable commands:
+npm run dev</code></pre>
+            </div>
+
+            <h3>Why npm scripts are essential</h3>
+            <ul>
+                <li><strong>Consistency</strong>: Everyone on your team runs the same commands</li>
+                <li><strong>Documentation</strong>: Scripts show how your project works</li>
+                <li><strong>Automation</strong>: Complex workflows become one-click operations</li>
+                <li><strong>Cross-platform</strong>: Work the same on Windows, Mac, and Linux</li>
+                <li><strong>Tool integration</strong>: Connect different development tools seamlessly</li>
+            </ul>
+
+            <div class="concept-box">
+                <h4>💡 Real-world connection</h4>
+                <p>Professional development teams rely heavily on npm scripts. CI/CD systems, deployment pipelines, and
+                    development workflows all use scripts to automate repetitive tasks.</p>
+            </div>
+        </section>
+
+        <section id="abracadabra-scripts">
+            <h2>Abracadabra scripts explained</h2>
+
+            <p>Let's break down each script in your Abracadabra project to understand what they do and why:</p>
+
+            <h3>The "generate" script</h3>
+            <pre><code>"generate": "cowsay 'Welcome to the most AWESOME website ever!' > generated/welcome.txt && cowsay -f dragon 'I am the guardian of this amazing site!' > generated/dragon.txt && cowsay -f tux 'Development tools make coding awesome!' > generated/tux.txt && node scripts/build-content.js"</code></pre>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">What this script does</h4>
+                <ol>
+                    <li><strong>Creates welcome.txt</strong>: Generates ASCII art welcome message</li>
+                    <li><strong>Creates dragon.txt</strong>: Generates dragon guardian message</li>
+                    <li><strong>Creates tux.txt</strong>: Generates development tools message</li>
+                    <li><strong>Runs build script</strong>: Processes all content files into HTML</li>
+                </ol>
+                <p><strong>Result</strong>: All the magical content for your website is created</p>
+            </div>
+
+            <h3>The "serve" script</h3>
+            <pre><code>"serve": "http-server -p 3000 -o"</code></pre>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">What this script does</h4>
+                <ul>
+                    <li><strong>http-server</strong>: Starts a development web server</li>
+                    <li><strong>-p 3000</strong>: Uses port 3000 specifically</li>
+                    <li><strong>-o</strong>: Opens the website in your browser automatically</li>
+                </ul>
+                <p><strong>Result</strong>: Your website opens at localhost:3000 with the magic activated</p>
+            </div>
+
+            <h3>The "dev" script</h3>
+            <pre><code>"dev": "npm run generate && npm run serve"</code></pre>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">What this script does</h4>
+                <ol>
+                    <li><strong>npm run generate</strong>: Runs the generate script first</li>
+                    <li><strong>&&</strong>: Only continues if the first command succeeds</li>
+                    <li><strong>npm run serve</strong>: Runs the serve script second</li>
+                </ol>
+                <p><strong>Result</strong>: Complete workflow from content generation to live website in one command</p>
+            </div>
+
+            <div class="concept-box">
+                <h4>🎯 The magic of "dev"</h4>
+                <p>The <code>dev</code> script is your complete development workflow. It ensures your content is always
+                    fresh and your server is ready. This is exactly how professional development teams work!</p>
+            </div>
+        </section>
+
+        <section id="script-syntax">
+            <h2>Script syntax and features</h2>
+
+            <p>Understanding script syntax helps you read, modify, and create your own scripts.</p>
+
+            <h3>Command chaining operators</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Sequential execution (&&)</h4>
+                <pre><code>"build-and-serve": "npm run build && npm run serve"</code></pre>
+                <p><strong>Behavior</strong>: Run second command only if first succeeds</p>
+                <p><strong>Use case</strong>: When the second step depends on the first</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Always run both (;)</h4>
+                <pre><code>"test-and-report": "npm test; npm run coverage"</code></pre>
+                <p><strong>Behavior</strong>: Run second command regardless of first result</p>
+                <p><strong>Use case</strong>: When both commands should run independently</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Run if first fails (||)</h4>
+                <pre><code>"start-with-fallback": "npm start || npm run dev"</code></pre>
+                <p><strong>Behavior</strong>: Run second command only if first fails</p>
+                <p><strong>Use case</strong>: Providing backup options</p>
+            </div>
+
+            <h3>Cross-platform considerations</h3>
+
+            <div class="warning-box">
+                <h4>⚠️ Platform differences</h4>
+                <p>Some commands work differently on Windows vs Mac/Linux:</p>
+                <ul>
+                    <li><strong>File paths</strong>: Use forward slashes (/) for cross-platform compatibility</li>
+                    <li><strong>Environment variables</strong>: Syntax differs between platforms</li>
+                    <li><strong>Shell commands</strong>: Some commands aren't available everywhere</li>
+                </ul>
+            </div>
+
+            <h3>Using variables and arguments</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">npm script variables</h4>
+                <pre><code>"project-info": "echo $npm_package_name version $npm_package_version"</code></pre>
+                <p>npm automatically provides variables from your package.json</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Passing arguments</h4>
+                <pre><code># In package.json:
+"serve-port": "http-server -p"
+
+# Usage:
+npm run serve-port -- 8080</code></pre>
+                <p>The <code>--</code> passes additional arguments to the script</p>
+            </div>
+        </section>
+
+        <section id="chaining-scripts">
+            <h2>Chaining and combining scripts</h2>
+
+            <p>Complex workflows are built by combining simple scripts in powerful ways.</p>
+
+            <h3>Building workflows</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Example: Complete deployment workflow</h4>
+                <pre><code>{
+  "scripts": {
+    "clean": "rm -rf dist/",
+    "build": "npm run clean && npm run generate",
+    "test": "npm run build && echo 'Testing built files...'",
+    "deploy": "npm run test && echo 'Deploying to production...'",
+    "full-deploy": "npm run deploy && echo 'Deployment complete!'"
+  }
+}</code></pre>
+                <p>Each script builds on the previous ones, creating a robust pipeline</p>
+            </div>
+
+            <h3>Parallel execution</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Running multiple servers</h4>
+                <pre><code># Install concurrently first:
+npm install --save-dev concurrently
+
+# Then create parallel script:
+"dev-full": "concurrently \"npm run api-server\" \"npm run web-server\""</code></pre>
+                <p>Some tasks need to run simultaneously rather than sequentially</p>
+            </div>
+
+            <h3>Conditional scripts</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Environment-based scripts</h4>
+                <pre><code>"start": "if [ \"$NODE_ENV\" = \"production\" ]; then npm run serve:prod; else npm run serve:dev; fi"</code></pre>
+                <p>Scripts can adapt behavior based on environment variables</p>
+            </div>
+
+            <h3>Pre and post hooks</h3>
+
+            <div class="concept-box">
+                <h4>🎯 Automatic script hooks</h4>
+                <p>npm automatically runs scripts with matching <code>pre</code> and <code>post</code> prefixes:</p>
+                <ul>
+                    <li><code>pretest</code> → <code>test</code> → <code>posttest</code></li>
+                    <li><code>prestart</code> → <code>start</code> → <code>poststart</code></li>
+                </ul>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Using hooks in Abracadabra</h4>
+                <pre><code>{
+  "scripts": {
+    "pregenerate": "mkdir -p generated",
+    "generate": "cowsay 'Hello World' > generated/welcome.txt",
+    "postgenerate": "echo 'Generation complete!'"
+  }
+}</code></pre>
+                <p>Running <code>npm run generate</code> automatically runs all three scripts</p>
+            </div>
+        </section>
+
+        <section id="advanced-patterns">
+            <h2>Advanced script patterns</h2>
+
+            <p>Professional projects use sophisticated script patterns for complex workflows.</p>
+
+            <h3>Configuration management</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Environment-specific configs</h4>
+                <pre><code>{
+  "scripts": {
+    "dev": "NODE_ENV=development npm run serve",
+    "prod": "NODE_ENV=production npm run serve",
+    "serve": "http-server -p $PORT -c-1"
+  }
+}</code></pre>
+                <p>Different environments can use different settings</p>
+            </div>
+
+            <h3>Tool integration</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Multiple tool workflow</h4>
+                <pre><code>{
+  "scripts": {
+    "lint": "eslint src/",
+    "format": "prettier --write src/",
+    "type-check": "tsc --noEmit",
+    "quality": "npm run lint && npm run format && npm run type-check"
+  }
+}</code></pre>
+                <p>Integrate linting, formatting, and type checking</p>
+            </div>
+
+            <h3>Watch modes and development</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">File watching for development</h4>
+                <pre><code>{
+  "scripts": {
+    "watch": "nodemon --watch src/ --exec 'npm run generate'",
+    "dev-watch": "npm run watch & npm run serve"
+  }
+}</code></pre>
+                <p>Automatically rebuild when files change</p>
+            </div>
+
+            <h3>Error handling and recovery</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Robust error handling</h4>
+                <pre><code>{
+  "scripts": {
+    "safe-deploy": "npm run test || (echo 'Tests failed, aborting deploy' && exit 1)",
+    "cleanup": "rm -rf temp/ || echo 'Nothing to clean'",
+    "reset": "npm run cleanup && npm install"
+  }
+}</code></pre>
+                <p>Handle failures gracefully and provide recovery options</p>
+            </div>
+        </section>
+
+        <section id="troubleshooting">
+            <h2>Troubleshooting scripts</h2>
+
+            <h3>Common script problems</h3>
+
+            <div class="warning-box">
+                <h4>❌ Command not found</h4>
+                <p><strong>Error</strong>: "cowsay: command not found"</p>
+                <p><strong>Cause</strong>: Package not installed or not in PATH</p>
+                <p><strong>Solution</strong>:</p>
+                <ol>
+                    <li>Check package is in devDependencies: <code>npm ls cowsay</code></li>
+                    <li>Reinstall if missing: <code>npm install --save-dev cowsay</code></li>
+                    <li>Verify npm scripts can find local packages automatically</li>
+                </ol>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ Script fails silently</h4>
+                <p><strong>Problem</strong>: Script appears to run but doesn't work</p>
+                <p><strong>Debugging steps</strong>:</p>
+                <ol>
+                    <li>Run parts of the script individually</li>
+                    <li>Check file permissions and paths</li>
+                    <li>Add echo statements to see progress</li>
+                    <li>Check if && is preventing later commands from running</li>
+                </ol>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ JSON syntax errors</h4>
+                <p><strong>Error</strong>: "Unexpected token in JSON"</p>
+                <p><strong>Common causes</strong>:</p>
+                <ul>
+                    <li>Missing comma between scripts</li>
+                    <li>Trailing comma after last script</li>
+                    <li>Unescaped quotes in script commands</li>
+                    <li>Missing closing brackets</li>
+                </ul>
+                <p><strong>Solution</strong>: Use VS Code's JSON validation or online JSON validator</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ Path issues</h4>
+                <p><strong>Problem</strong>: Scripts can't find files or directories</p>
+                <p><strong>Solutions</strong>:</p>
+                <ul>
+                    <li>Use relative paths from project root</li>
+                    <li>Check that directories exist before writing to them</li>
+                    <li>Use cross-platform path separators (/)</li>
+                    <li>Verify working directory with <code>pwd</code></li>
+                </ul>
+            </div>
+
+            <h3>Debugging techniques</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Add debug output</h4>
+                <pre><code>"debug-generate": "echo 'Starting generation...' && npm run generate && echo 'Generation complete'"</code></pre>
+                <p>Add echo statements to track script progress</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Test components individually</h4>
+                <pre><code># Instead of running full "dev" script:
+npm run generate  # Test this first
+npm run serve     # Then test this separately</code></pre>
+                <p>Isolate problems by testing each part individually</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Verbose output</h4>
+                <pre><code># Add --verbose or --loglevel verbose for more info:
+npm run generate --loglevel verbose</code></pre>
+                <p>Get more detailed output to understand what's happening</p>
+            </div>
+
+            <h3>Best practices for reliable scripts</h3>
+            <ul>
+                <li><strong>Keep scripts simple</strong>: Complex logic belongs in separate files</li>
+                <li><strong>Use absolute paths</strong>: Or ensure working directory is correct</li>
+                <li><strong>Handle errors</strong>: Provide meaningful error messages</li>
+                <li><strong>Document scripts</strong>: Add comments explaining what they do</li>
+                <li><strong>Test cross-platform</strong>: Verify scripts work on different systems</li>
+            </ul>
+        </section>
+
+        <section id="ai-helper" class="ai-helper-section">
+            <h2>AI helper - npm Scripts</h2>
+
+            <div class="context-guidance">
+                <h3>💡 Getting better help with context</h3>
+                <div class="context-methods">
+                    <div class="method">
+                        <strong>File-capable AI:</strong> Share your <code>package.json</code> file path, any custom
+                        scripts you're working on, and mention you're following the Abracadabra npm scripts tutorial.
+                    </div>
+                    <div class="method">
+                        <strong>Upload-capable AI:</strong> Upload your <code>package.json</code>, screenshots of
+                        errors, and any custom script files you've created.
+                    </div>
+                    <div class="method">
+                        <strong>Text-only AI:</strong> Copy/paste your scripts section from package.json, error
+                        messages, and describe what you're trying to automate.
+                    </div>
+                </div>
+                <p class="context-note">Always include your Node.js version (<code>node --version</code>), npm version
+                    (<code>npm --version</code>), and operating system for script compatibility help.</p>
+            </div>
+
+            <div class="ai-categories">
+                <div class="ai-category" data-category="understanding">
+                    <h3>🧠 Understanding concepts</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="I'm working on the Abracadabra npm scripts tutorial. Help me understand how npm scripts work and why they're better than running commands manually.">Copy</button>
+                            <p class="prompt-text">"I'm working on the Abracadabra npm scripts tutorial. Help me
+                                understand how npm scripts work and why they're better than running commands manually."
+                            </p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Share your current package.json scripts
+                                section</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="Explain the difference between && and & in npm scripts using my Abracadabra project as an example.">Copy</button>
+                            <p class="prompt-text">"Explain the difference between && and & in npm scripts using my
+                                Abracadabra project as an example."</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="Help me understand npm script lifecycle and how pre/post scripts work in the context of my Abracadabra project.">Copy</button>
+                            <p class="prompt-text">"Help me understand npm script lifecycle and how pre/post scripts
+                                work in the context of my Abracadabra project."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-category" data-category="script-writing">
+                    <h3>✏️ Script writing assistance</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="Help me create a custom npm script for my Abracadabra project that does [specific task]. Here's my current package.json scripts section.">Copy</button>
+                            <p class="prompt-text">"Help me create a custom npm script for my Abracadabra project that
+                                does [specific task]. Here's my current package.json scripts section."</p>
+                            <p class="context-hint">⚠️ <strong>Essential:</strong> Replace [specific task] with what you
+                                want to automate and paste your current scripts</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="I want to modify the 'dev' script in my Abracadabra project to include additional steps. Here's what I'm trying to achieve and my current setup.">Copy</button>
+                            <p class="prompt-text">"I want to modify the 'dev' script in my Abracadabra project to
+                                include additional steps. Here's what I'm trying to achieve and my current setup."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Describe the additional steps and share
+                                your current dev script</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-category" data-category="debugging">
+                    <h3>🔧 Debugging script errors</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="My Abracadabra npm script is failing with this error. Here's the error message and my package.json scripts section.">Copy</button>
+                            <p class="prompt-text">"My Abracadabra npm script is failing with this error. Here's the
+                                error message and my package.json scripts section."</p>
+                            <p class="context-hint">⚠️ <strong>Essential:</strong> Include complete error message, the
+                                script that failed, and your operating system</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="My npm run dev command starts but doesn't work as expected in my Abracadabra project. Here's what happens vs what should happen.">Copy</button>
+                            <p class="prompt-text">"My npm run dev command starts but doesn't work as expected in my
+                                Abracadabra project. Here's what happens vs what should happen."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Describe the expected vs actual
+                                behavior and share your dev script</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="next-steps">
+            <h2>Next steps</h2>
+            <p>Now that you understand npm scripts, you're ready to:</p>
+            <ol>
+                <li>Experiment with modifying the existing Abracadabra scripts</li>
+                <li>Learn about <a href="development-servers.html">development servers and live reload</a></li>
+                <li>Explore <a href="troubleshooting.html">troubleshooting common issues</a></li>
+                <li>Create your own custom scripts for future projects</li>
+            </ol>
+
+            <div class="concept-box">
+                <h4>🎯 Practice exercise</h4>
+                <p>Try creating a new script that generates only one cowsay file and serves it. This will help you
+                    understand how to modify and create your own automation workflows.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/tutorial-nav.js"></script>
+    <script src="js/progress-tracker.js"></script>
+</body>
+
+</html>

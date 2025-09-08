@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abracadabra Project - Tutorial Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@300..700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="tutorial-styles.css">
+</head>
+
+<body>
+    <header class="hero">
+        <div class="container">
+            <h1>🪄 Abracadabra Project</h1>
+            <p class="hero-subtitle">Interactive Tutorial Hub</p>
+            <p class="hero-description">Learn npm workflows, VS Code, and development automation through step-by-step
+                guides</p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- <section class="progress-overview">
+            <h2>Your learning progress</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="overall-progress"></div>
+            </div>
+            <p class="progress-text"><span id="completed-count">0</span> of <span id="total-count">8</span> tutorials
+                completed</p>
+        </section> -->
+
+        <section class="tutorials-grid">
+            <h2>Foundation tutorials</h2>
+
+            <article class="tutorial-card featured" data-tutorial="assignment-overview">
+                <div class="tutorial-icon">
+                    <img src="images/image-scroll.png" alt="Assignment overview icon showing an unfurled scroll"
+                        class="tutorial-icon-image">
+                </div>
+                <h3>Assignment overview</h3>
+                <p>Your complete beginner-friendly guide to understanding this project and your learning journey</p>
+                <div class="tutorial-meta">
+                    <span class="difficulty welcome">Welcome</span>
+                    <span class="focused-skill">project orientation</span>
+                </div>
+                <a href="assignment-overview.html" class="tutorial-link">Start Here!</a>
+                <div class="completion-badge" id="badge-assignment-overview">✅</div>
+            </article>
+
+            <article class="tutorial-card" data-tutorial="npm-basics">
+                <div class="tutorial-icon">
+                    <img src="images/image-mason.png"
+                        alt="npm Basics icon showing building blocks and construction tools"
+                        class="tutorial-icon-image">
+                </div>
+                <h3>npm Basics</h3>
+                <p>Understanding npm, package.json, and dependency management fundamentals</p>
+                <div class="tutorial-meta">
+                    <span class="difficulty easy">Beginner</span>
+                    <span class="focused-skill">npm workflows</span>
+                </div>
+                <a href="npm-basics.html" class="tutorial-link">Start Tutorial</a>
+                <div class="completion-badge" id="badge-npm-basics">✅</div>
+            </article>
+
+            <article class="tutorial-card" data-tutorial="package-json-guide">
+                <div class="tutorial-icon">
+                    <img src="images/image-manuscript.png"
+                        alt="package.json Guide icon showing detailed documentation manuscript"
+                        class="tutorial-icon-image">
+                </div>
+                <h3>package.json Guide</h3>
+                <p>Interactive guide to creating and editing package.json with common mistake fixes</p>
+                <div class="tutorial-meta">
+                    <span class="difficulty easy">Beginner</span>
+                    <span class="focused-skill">package.json mastery</span>
+                </div>
+                <a href="package-json-guide.html" class="tutorial-link">Start Tutorial</a>
+                <div class="completion-badge" id="badge-package-json-guide">✅</div>
+            </article>
+
+            <article class="tutorial-card" data-tutorial="vscode-setup">
+                <div class="tutorial-icon">
+                    <img src="images/image-writing-tools.png"
+                        alt="VS Code setup icon showing crafting and writing tools" class="tutorial-icon-image">
+                </div>
+                <h3>VS Code setup</h3>
+                <p>Optimizing your development environment for web projects with extensions, settings, and workflow tips
+                </p>
+                <div class="tutorial-meta">
+                    <span class="difficulty easy">Easy</span>
+                    <span class="focused-skill">VS Code setup</span>
+                </div>
+                <a href="vscode-setup.html" class="tutorial-link">Start Tutorial</a>
+                <div class="completion-badge" id="badge-vscode-setup">✅</div>
+            </article>
+
+            <article class="tutorial-card" data-tutorial="npm-scripts-tutorial">
+                <div class="tutorial-icon">
+                    <img src="images/image-water-wheel.png"
+                        alt="npm Scripts tutorial icon showing automation water wheel" class="tutorial-icon-image">
+                </div>
+                <h3>npm Scripts tutorial</h3>
+                <p>Mastering custom commands and automation workflows for efficient development</p>
+                <div class="tutorial-meta">
+                    <span class="difficulty medium">Medium</span>
+                    <span class="focused-skill">automation scripts</span>
+                </div>
+                <a href="npm-scripts-tutorial.html" class="tutorial-link">Start Tutorial</a>
+                <div class="completion-badge" id="badge-npm-scripts-tutorial">✅</div>
+            </article>
+
+            <article class="tutorial-card" data-tutorial="development-servers">
+                <div class="tutorial-icon">
+                    <img src="images/image-tower.png" alt="Development servers icon showing tall tower structure"
+                        class="tutorial-icon-image">
+                </div>
+                <h3>Development servers</h3>
+                <p>Understanding local servers, ports, and the magic of live development</p>
+                <div class="tutorial-meta">
+                    <span class="difficulty medium">Medium</span>
+                    <span class="focused-skill">local servers</span>
+                </div>
+                <a href="development-servers.html" class="tutorial-link">Start Tutorial</a>
+                <div class="completion-badge" id="badge-development-servers">✅</div>
+            </article>
+
+            <article class="tutorial-card" data-tutorial="troubleshooting">
+                <div class="tutorial-icon">
+                    <img src="images/image-glass.png"
+                        alt="Troubleshooting icon showing magnifying glass for investigation"
+                        class="tutorial-icon-image">
+                </div>
+                <h3>Troubleshooting</h3>
+                <p>Solving common issues and debugging like a pro</p>
+                <div class="tutorial-meta">
+                    <span class="difficulty easy">All levels</span>
+                    <span class="focused-skill">debugging</span>
+                </div>
+                <a href="troubleshooting.html" class="tutorial-link">Start Tutorial</a>
+                <div class="completion-badge" id="badge-troubleshooting">✅</div>
+            </article>
+
+            <article class="tutorial-card" data-tutorial="evidence-guide">
+                <div class="tutorial-icon">
+                    <img src="images/image-scholar.png" alt="Evidence guide icon showing scholarly documentation"
+                        class="tutorial-icon-image">
+                </div>
+                <h3>Evidence guide</h3>
+                <p>Creating professional documentation and proof of completion</p>
+                <div class="tutorial-meta">
+                    <span class="difficulty easy">All levels</span>
+                    <span class="focused-skill">documentation</span>
+                </div>
+                <a href="evidence-guide.html" class="tutorial-link">Start Tutorial</a>
+                <div class="completion-badge" id="badge-evidence-guide">✅</div>
+            </article>
+        </section>
+
+        <section class="getting-started">
+            <h2>Getting started</h2>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Open Your Project</h3>
+                    <p>Make sure your Abracadabra project is open in VS Code</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Start Live Server</h3>
+                    <p>Right-click on any file in the docs folder and select "Open with Live Server"</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Learn & Practice</h3>
+                    <p>Follow tutorials step-by-step while working on your main project</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-status">
+            <h2>Project Status</h2>
+            <div class="status-grid">
+                <div class="status-item">
+                    <div class="status-icon">📁</div>
+                    <h4>Main Project</h4>
+                    <p>Running on <a href="http://localhost:3000" target="_blank" rel="noopener">localhost:3000</a></p>
+                    <small>Use <code>npm run serve</code> in VS Code terminal</small>
+                </div>
+                <div class="status-item active">
+                    <div class="status-icon">📚</div>
+                    <h4>Tutorial Docs</h4>
+                    <p>Running on <a href="http://localhost:5000" target="_blank" rel="noopener">localhost:5000</a></p>
+                    <small>You are here! Use "Go Live" in VS Code</small>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="tutorial-footer">
+        <div class="container">
+            <p>&copy; 2025 Abracadabra Project Tutorial System</p>
+            <p>Learn npm workflows and development automation</p>
+        </div>
+    </footer>
+
+    <script src="js/tutorial-nav.js"></script>
+    <script src="js/progress-tracker.js"></script>
+</body>
+
+</html>

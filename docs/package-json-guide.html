@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+File: /docs/package-json-guide.html
+Owner: Cynthia
+Project: Abracadabra
+Created: 2025-09-06
+Duration: 25 min
+Notes: Interactive guide to package.json creation and management
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>package.json Guide - Abracadabra Tutorial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@300..700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="tutorial-styles.css">
+</head>
+
+<body>
+    <main class="tutorial-content">
+        <header class="tutorial-header">
+            <h1>📋 package.json Guide</h1>
+            <p class="tutorial-subtitle">Interactive guide to creating and editing package.json files</p>
+        </header>
+
+        <div class="quick-access">
+            <h2>Quick access</h2>
+            <div class="quick-links">
+                <a href="#skill-expectations" class="quick-link">
+                    <span class="quick-icon">🎯</span>
+                    <span class="quick-text">Skills</span>
+                </a>
+                <a href="#tldr" class="quick-link">
+                    <span class="quick-icon">⚡</span>
+                    <span class="quick-text">TL;DR Summary</span>
+                </a>
+                <a href="#ai-helper" class="quick-link">
+                    <span class="quick-icon">🤖</span>
+                    <span class="quick-text">AI Helper</span>
+                </a>
+            </div>
+        </div>
+
+        <section id="skill-expectations" class="skill-expectations">
+            <h2>Skill expectations</h2>
+            <div class="skills-overview">
+                <div class="assumed-skills">
+                    <h3>Assumed you know</h3>
+                    <ul>
+                        <li>Execute npm install to set up project dependencies</li>
+                        <li>Read and interpret package.json scripts section</li>
+                        <li>Use VS Code integrated terminal</li>
+                        <li>Navigate VS Code file explorer</li>
+                    </ul>
+                </div>
+                <div class="focused-skills">
+                    <h3>You'll learn here</h3>
+                    <ul>
+                        <li>Modify HTML content while maintaining semantic structure</li>
+                        <li>Work with CSS custom properties for consistent theming</li>
+                        <li>Test layout changes across different screen sizes</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <nav class="tutorial-toc">
+            <h2>Table of contents</h2>
+            <ul>
+                <li><a href="#tldr">TL;DR</a></li>
+                <li><a href="#getting-started">Getting started</a></li>
+                <li><a href="#basic-structure">Basic structure</a></li>
+                <li><a href="#adding-scripts">Adding scripts</a></li>
+                <li><a href="#common-mistakes">Common mistakes</a></li>
+                <li><a href="#interactive-practice">Interactive practice</a></li>
+                <li><a href="#abracadabra-specific">Abracadabra specific</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+                <li><a href="#ai-helper">AI Helper</a></li>
+            </ul>
+        </nav>
+
+        <section id="tldr" class="tldr-section">
+            <h2>TL;DR</h2>
+            <div class="tldr-content">
+                <h3>package.json structure and purpose</h3>
+                <p>package.json is your project's control center - it tells npm what packages to install, how to run
+                    your scripts, and defines your project's identity. Think of it as your project's DNA.</p>
+
+                <h3>Scripts section significance for Abracadabra</h3>
+                <div class="concept-box">
+                    <h4>🎯 Essential scripts</h4>
+                    <ul>
+                        <li><code>"generate"</code> - Creates ASCII art using cowsay commands</li>
+                        <li><code>"serve"</code> - Starts http-server on port 3000</li>
+                        <li><code>"dev"</code> - Combines generate + serve for one-command development</li>
+                    </ul>
+                </div>
+
+                <h3>Dependencies vs devDependencies</h3>
+                <p><strong>devDependencies</strong> are tools used during development (like cowsay and http-server for
+                    Abracadabra). <strong>dependencies</strong> are packages your app needs to run in production. For
+                    educational projects, most packages go in devDependencies.</p>
+
+                <div class="warning-box">
+                    <h4>⚠️ Common mistake</h4>
+                    <p>JSON is strict about syntax - missing commas, extra commas, or unmatched quotes will break your
+                        entire project. Always validate JSON formatting!</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="getting-started">
+            <h2>Getting Started with package.json</h2>
+
+            <div class="concept-box">
+                <h4>🎯 What You'll Learn</h4>
+                <p>By the end of this tutorial, you'll confidently create and edit package.json files, understand JSON
+                    syntax rules, and avoid common mistakes that trip up beginners.</p>
+            </div>
+
+            <p>The <code>package.json</code> file is the heart of any Node.js/npm project. Think of it as your project's
+                ID card - it tells npm everything it needs to know about your project.</p>
+
+            <div class="step-by-step">
+                <h3>Quick Start Process</h3>
+
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Initialize Your Project</h4>
+                        <p>Run <code>npm init -y</code> in your project directory to create a basic package.json file.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Open in VS Code</h4>
+                        <p>VS Code provides JSON syntax highlighting, error detection, and IntelliSense autocomplete.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Edit Carefully</h4>
+                        <p>Follow JSON syntax rules: double quotes, proper commas, no trailing commas.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Validate & Test</h4>
+                        <p>Save the file and run <code>npm install</code> to check for syntax errors.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="basic-structure">
+            <h2>Basic Structure</h2>
+
+            <p>Here's what a typical package.json looks like after running <code>npm init -y</code>:</p>
+
+            <pre><code>{
+  "name": "abracadabra-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}</code></pre>
+
+            <h3>Understanding Each Field</h3>
+
+            <ul>
+                <li><strong>"name"</strong>: Your project name (automatically set to folder name)</li>
+                <li><strong>"version"</strong>: Project version using semantic versioning</li>
+                <li><strong>"description"</strong>: Brief project description</li>
+                <li><strong>"main"</strong>: Entry point file (not critical for web projects)</li>
+                <li><strong>"scripts"</strong>: Commands you can run with <code>npm run</code></li>
+                <li><strong>"keywords"</strong>: Array of search terms (for npm registry)</li>
+                <li><strong>"author"</strong>: Your name or organization</li>
+                <li><strong>"license"</strong>: Open source license type</li>
+            </ul>
+
+            <div class="concept-box">
+                <h4>💡 Pro Tip</h4>
+                <p>The fields you'll modify most often are <code>"scripts"</code>, <code>"dependencies"</code>, and
+                    <code>"devDependencies"</code>. The others can usually stay as-is.</p>
+            </div>
+        </section>
+
+        <section id="adding-scripts">
+            <h2>Adding Scripts</h2>
+
+            <p>Scripts are the most powerful feature of package.json. They let you define custom commands that can be
+                run with <code>npm run script-name</code>.</p>
+
+            <h3>Your Abracadabra Scripts</h3>
+            <p>You'll replace the default "test" script with these three scripts:</p>
+
+            <pre><code>"scripts": {
+  "generate": "cowsay 'Welcome to the most AWESOME website ever!' > generated/welcome.txt && cowsay -f dragon 'I am the guardian of this amazing site!' > generated/dragon.txt && cowsay -f tux 'Development tools make coding awesome!' > generated/tux.txt && node scripts/build-content.js",
+  "serve": "http-server -p 3000 -o",
+  "dev": "npm run generate && npm run serve"
+}</code></pre>
+
+            <div class="concept-box">
+                <h4>🔗 Command Chaining</h4>
+                <p>The <code>&&</code> operator chains commands - each command runs only if the previous one succeeds.
+                    The "dev" script runs "generate" first, then "serve".</p>
+            </div>
+
+            <h3>How to Add Scripts Safely</h3>
+            <ol>
+                <li><strong>Find the "scripts" section</strong> in your package.json</li>
+                <li><strong>Delete the "test" line</strong> (including the comma if it's not the last item)</li>
+                <li><strong>Add your new scripts</strong> with proper comma placement</li>
+                <li><strong>Save and test</strong> with <code>npm run generate</code></li>
+            </ol>
+        </section>
+
+        <section id="common-mistakes">
+            <h2>Common Mistakes & How to Fix Them</h2>
+
+            <div class="comparison-grid">
+                <div class="comparison-item wrong">
+                    <div class="comparison-header">
+                        <span class="comparison-icon">❌</span>
+                        <h4 class="comparison-title">Missing Comma</h4>
+                    </div>
+                    <pre><code>"scripts": {
+  "generate": "cowsay..."
+  "serve": "http-server..."
+}</code></pre>
+                    <p><strong>Error:</strong> JSON requires commas between properties.</p>
+                </div>
+
+                <div class="comparison-item correct">
+                    <div class="comparison-header">
+                        <span class="comparison-icon">✅</span>
+                        <h4 class="comparison-title">Correct Comma</h4>
+                    </div>
+                    <pre><code>"scripts": {
+  "generate": "cowsay...",
+  "serve": "http-server..."
+}</code></pre>
+                    <p><strong>Fix:</strong> Add comma after each property except the last one.</p>
+                </div>
+
+                <div class="comparison-item wrong">
+                    <div class="comparison-header">
+                        <span class="comparison-icon">❌</span>
+                        <h4 class="comparison-title">Trailing Comma</h4>
+                    </div>
+                    <pre><code>"scripts": {
+  "generate": "cowsay...",
+  "serve": "http-server...",
+}</code></pre>
+                    <p><strong>Error:</strong> JSON doesn't allow trailing commas.</p>
+                </div>
+
+                <div class="comparison-item correct">
+                    <div class="comparison-header">
+                        <span class="comparison-icon">✅</span>
+                        <h4 class="comparison-title">No Trailing Comma</h4>
+                    </div>
+                    <pre><code>"scripts": {
+  "generate": "cowsay...",
+  "serve": "http-server..."
+}</code></pre>
+                    <p><strong>Fix:</strong> Remove comma from the last property.</p>
+                </div>
+
+                <div class="comparison-item wrong">
+                    <div class="comparison-header">
+                        <span class="comparison-icon">❌</span>
+                        <h4 class="comparison-title">Single Quotes</h4>
+                    </div>
+                    <pre><code>'scripts': {
+  'generate': 'cowsay...'
+}</code></pre>
+                    <p><strong>Error:</strong> JSON requires double quotes for keys and strings.</p>
+                </div>
+
+                <div class="comparison-item correct">
+                    <div class="comparison-header">
+                        <span class="comparison-icon">✅</span>
+                        <h4 class="comparison-title">Double Quotes</h4>
+                    </div>
+                    <pre><code>"scripts": {
+  "generate": "cowsay..."
+}</code></pre>
+                    <p><strong>Fix:</strong> Always use double quotes in JSON.</p>
+                </div>
+
+                <div class="comparison-item wrong">
+                    <div class="comparison-header">
+                        <span class="comparison-icon">❌</span>
+                        <h4 class="comparison-title">Missing Quotes</h4>
+                    </div>
+                    <pre><code>scripts: {
+  generate: cowsay...
+}</code></pre>
+                    <p><strong>Error:</strong> Keys and values must be quoted.</p>
+                </div>
+
+                <div class="comparison-item correct">
+                    <div class="comparison-header">
+                        <span class="comparison-icon">✅</span>
+                        <h4 class="comparison-title">Proper Quotes</h4>
+                    </div>
+                    <pre><code>"scripts": {
+  "generate": "cowsay..."
+}</code></pre>
+                    <p><strong>Fix:</strong> Quote all keys and string values.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="interactive-practice">
+            <h2>Interactive Practice</h2>
+
+            <div class="interactive-editor">
+                <div class="editor-header">
+                    <h4 class="editor-title">Practice JSON Editing</h4>
+                    <button type="button" class="validate-btn" onclick="validateJSON()">Validate JSON</button>
+                </div>
+
+                <p>Try editing this package.json. Fix any syntax errors and add the missing scripts:</p>
+
+                <textarea class="json-editor" id="jsonEditor" aria-label="JSON editor for practice" placeholder="Edit the JSON below to practice...">{
+  "name": "abracadabra-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}</textarea>
+
+                <div class="validation-result" id="validationResult"></div>
+            </div>
+
+            <div class="success-box">
+                <h4>✅ Target Goal</h4>
+                <p>Replace the "test" script with these three scripts:</p>
+                <ul>
+                    <li><strong>"generate"</strong>: The full cowsay command chain</li>
+                    <li><strong>"serve"</strong>: <code>http-server -p 3000 -o</code></li>
+                    <li><strong>"dev"</strong>: <code>npm run generate && npm run serve</code></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="abracadabra-specific">
+            <h2>Abracadabra Project Specific</h2>
+
+            <p>Here's exactly what your final package.json should look like for the Abracadabra project:</p>
+
+            <pre><code>{
+  "name": "abracadabra-starter",
+  "version": "1.0.0",
+  "description": "npm workflow demonstration with magical transformation",
+  "main": "index.js",
+  "scripts": {
+    "generate": "cowsay 'Welcome to the most AWESOME website ever!' > generated/welcome.txt && cowsay -f dragon 'I am the guardian of this amazing site!' > generated/dragon.txt && cowsay -f tux 'Development tools make coding awesome!' > generated/tux.txt && node scripts/build-content.js",
+    "serve": "http-server -p 3000 -o",
+    "dev": "npm run generate && npm run serve"
+  },
+  "keywords": ["npm", "automation", "cowsay", "education"],
+  "author": "Your Name",
+  "license": "ISC",
+  "devDependencies": {
+    "cowsay": "^1.6.0",
+    "http-server": "^14.1.1"
+  }
+}</code></pre>
+
+            <div class="concept-box">
+                <h4>🎯 Key Points</h4>
+                <ul>
+                    <li><strong>devDependencies</strong> will be added automatically when you run
+                        <code>npm install --save-dev cowsay http-server</code></li>
+                    <li><strong>Scripts</strong> must be added manually by editing the file</li>
+                    <li><strong>Description</strong> and <strong>keywords</strong> are optional but helpful</li>
+                </ul>
+            </div>
+
+            <h3>Verification Commands</h3>
+            <p>After setting up your package.json, verify it works:</p>
+
+            <pre><code># Check that packages are installed correctly
+npm list --depth=0
+
+# Test each script individually
+npm run generate
+npm run serve
+
+# Test the full workflow
+npm run dev</code></pre>
+        </section>
+
+        <section id="troubleshooting">
+            <h2>Troubleshooting</h2>
+
+            <div class="warning-box">
+                <h4>⚠️ VS Code Shows Red Squiggles</h4>
+                <p><strong>Problem:</strong> Red underlines in your package.json file.</p>
+                <p><strong>Solution:</strong> Hover over the red lines to see the exact error. Usually it's missing
+                    commas, trailing commas, or quote issues.</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ npm run generate fails</h4>
+                <p><strong>Problem:</strong> "Command not found" or script errors.</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Check that devDependencies are installed: <code>npm install</code></li>
+                    <li>Verify the generated/ folder exists</li>
+                    <li>Check for typos in the script commands</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Can't Save File</h4>
+                <p><strong>Problem:</strong> VS Code won't let you save package.json.</p>
+                <p><strong>Solution:</strong> Fix all JSON syntax errors first. VS Code prevents saving invalid JSON
+                    files.</p>
+            </div>
+
+            <h3>JSON Validation Tools</h3>
+            <p>If you're struggling with JSON syntax:</p>
+            <ul>
+                <li><strong>VS Code</strong>: Built-in JSON validation with error highlighting</li>
+                <li><strong>jsonlint.com</strong>: Online JSON validator</li>
+                <li><strong>npm install</strong>: Will report JSON parsing errors</li>
+            </ul>
+        </section>
+
+        <section id="ai-helper" class="ai-helper-section">
+            <h2>AI helper - package.json Guide</h2>
+
+            <div class="context-guidance">
+                <h3>💡 Getting better help with context</h3>
+                <div class="context-methods">
+                    <div class="method">
+                        <strong>File-capable AI (Claude Code, Copilot):</strong> Share your <code>package.json</code>
+                        file path so AI can see the exact content and syntax.
+                    </div>
+                    <div class="method">
+                        <strong>Upload-capable AI (ChatGPT, Claude web):</strong> Upload your <code>package.json</code>
+                        file and screenshots of VS Code errors.
+                    </div>
+                    <div class="method">
+                        <strong>Text-only AI:</strong> Copy/paste your complete <code>package.json</code> content and
+                        any error messages.
+                    </div>
+                </div>
+                <p class="context-note">For JSON syntax errors, always include the complete file content - partial
+                    snippets make it hard to spot missing commas or brackets.</p>
+            </div>
+
+            <div class="ai-categories">
+                <div class="ai-category" data-category="understanding">
+                    <h3>🧠 Understanding concepts</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="Explain how npm scripts work and why they're useful for development workflows.">Copy</button>
+                            <p class="prompt-text">"Explain how npm scripts work and why they're useful for development
+                                workflows."</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="I'm confused about JSON syntax rules. What are the most important formatting requirements?">Copy</button>
+                            <p class="prompt-text">"I'm confused about JSON syntax rules. What are the most important
+                                formatting requirements?"</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="What's the difference between editing package.json manually vs using npm commands?">Copy</button>
+                            <p class="prompt-text">"What's the difference between editing package.json manually vs using
+                                npm commands?"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-category" data-category="troubleshooting">
+                    <h3>🔧 Troubleshooting problems</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="My package.json has syntax errors and VS Code shows red squiggles.">Copy</button>
+                            <p class="prompt-text">"My package.json has syntax errors and VS Code shows red squiggles."
+                            </p>
+                            <p class="context-hint">⚠️ <strong>Essential:</strong> Share your complete package.json
+                                content</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="I added scripts to package.json but npm run script-name says command not found.">Copy</button>
+                            <p class="prompt-text">"I added scripts to package.json but npm run script-name says command
+                                not found."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Include your scripts section and the
+                                exact error message</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="VS Code won't let me save my package.json file.">Copy</button>
+                            <p class="prompt-text">"VS Code won't let me save my package.json file."</p>
+                            <p class="context-hint">⚠️ <strong>Essential:</strong> Include your complete file content to
+                                identify syntax issues</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-category" data-category="customization">
+                    <h3>⚙️ Customization and extension</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="Help me create more advanced npm scripts with error handling and environment variables.">Copy</button>
+                            <p class="prompt-text">"Help me create more advanced npm scripts with error handling and
+                                environment variables."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Share your current scripts and describe
+                                what you want to achieve</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="I want to add pre and post hooks to my npm scripts.">Copy</button>
+                            <p class="prompt-text">"I want to add pre and post hooks to my npm scripts."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Include your current scripts section
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-category" data-category="integration">
+                    <h3>🔗 Connecting to other tutorials</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="How do the package.json skills I learned connect to VS Code setup and development servers?">Copy</button>
+                            <p class="prompt-text">"How do the package.json skills I learned connect to VS Code setup
+                                and development servers?"</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="I finished the package.json guide. What should I focus on for the npm scripts tutorial?">Copy</button>
+                            <p class="prompt-text">"I finished the package.json guide. What should I focus on for the
+                                npm scripts tutorial?"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="next-steps">
+            <h2>Next Steps</h2>
+            <p>Now that you can confidently edit package.json files:</p>
+            <ol>
+                <li>Apply this knowledge to set up your Abracadabra project</li>
+                <li>Install the required dependencies with proper flags</li>
+                <li>Add the three required scripts exactly as shown</li>
+                <li>Test your setup with the verification commands</li>
+                <li>Move on to understanding <a href="npm-scripts-tutorial.html">advanced npm scripts and workflows</a>
+                </li>
+            </ol>
+        </section>
+    </main>
+
+    <script src="js/tutorial-nav.js"></script>
+    <script src="js/progress-tracker.js"></script>
+
+    <script>
+        // JSON validation specific to this tutorial
+
+        function validateJSON() {
+            const editor = document.getElementById('jsonEditor');
+            const result = document.getElementById('validationResult');
+            const jsonText = editor.value;
+
+            result.style.display = 'block';
+
+            try {
+                const parsed = JSON.parse(jsonText);
+
+                // Check for Abracadabra-specific requirements
+                let warnings = [];
+
+                if (!parsed.scripts) {
+                    warnings.push('Missing "scripts" section');
+                } else {
+                    if (!parsed.scripts.generate) warnings.push('Missing "generate" script');
+                    if (!parsed.scripts.serve) warnings.push('Missing "serve" script');
+                    if (!parsed.scripts.dev) warnings.push('Missing "dev" script');
+                    if (parsed.scripts.test) warnings.push('Should remove default "test" script');
+                }
+
+                if (!parsed.devDependencies || (!parsed.devDependencies.cowsay || !parsed.devDependencies['http-server'])) {
+                    warnings.push('Missing cowsay and http-server devDependencies (these will be added by npm install)');
+                }
+
+                if (warnings.length === 0) {
+                    result.className = 'validation-result success';
+                    result.innerHTML = '✅ Perfect! Your JSON is valid and includes all required Abracadabra scripts.';
+                } else {
+                    result.className = 'validation-result error';
+                    result.innerHTML = '⚠️ Valid JSON, but missing: ' + warnings.join(', ');
+                }
+
+            } catch (error) {
+                result.className = 'validation-result error';
+                result.innerHTML = '❌ JSON Syntax Error: ' + error.message;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

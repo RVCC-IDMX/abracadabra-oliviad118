@@ -1,0 +1,43 @@
+name: Create Specification Issues
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  create-all-issues:
+    if: github.event.issue.title == 'Initialize Specs'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Create required labels if they don't exist
+        run: |
+          gh label create "status:ready-for-review" --color f97316 --description "Ready for instructor review" || true
+          gh label create "status:complete" --color 22c55e --description "Specification completed" || true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Create Spec 1 - Setup npm tools
+        uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          filename: .github/ISSUE_TEMPLATE/spec-1-setup-tools.md
+      
+      - name: Wait briefly for issue number sequencing
+        run: sleep 2
+      
+      - name: Create Spec 2 - Run the magic
+        uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          filename: .github/ISSUE_TEMPLATE/spec-2-run-magic.md
+      
+      - name: Close trigger issue
+        uses: peter-evans/close-issue@v3
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          comment: "🪄 All Abracadabra specification issues have been created! Check your Issues tab to see your requirements and start the magic transformation!"

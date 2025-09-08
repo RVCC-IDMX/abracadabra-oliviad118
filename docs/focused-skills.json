@@ -1,0 +1,168 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-09-06",
+  "description": "Skills that specific tutorials teach, practice, and assess",
+  "tutorials": [
+    {
+      "id": "spec-1-setup-tools",
+      "title": "Set up development tools and workflow",
+      "teaches": [
+        {
+          "id": "npm-install-flow",
+          "label": "Execute npm install to set up project dependencies",
+          "assesses": true
+        },
+        {
+          "id": "package-scripts-reading",
+          "label": "Read and interpret package.json scripts section",
+          "assesses": true
+        },
+        {
+          "id": "dev-server-workflow",
+          "label": "Start development server and navigate to localhost",
+          "assesses": true
+        }
+      ],
+      "assumes": [
+        "vscode/open-folder",
+        "vscode/integrated-terminal",
+        "git/clone-repository"
+      ],
+      "evidence": [
+        {
+          "kind": "terminal-log",
+          "what": "Successful npm install output showing dependency installation"
+        },
+        {
+          "kind": "screenshot",
+          "what": "Project running at http://localhost:3000 or configured port"
+        },
+        {
+          "kind": "code-explanation",
+          "what": "Explanation of what each script in package.json does"
+        }
+      ]
+    },
+    {
+      "id": "spec-2-magic-mode-debug",
+      "title": "Debug and activate dynamic content rendering",
+      "teaches": [
+        {
+          "id": "css-class-debugging",
+          "label": "Inspect and modify CSS classes to change page behavior",
+          "assesses": true
+        },
+        {
+          "id": "browser-devtools-workflow",
+          "label": "Use browser developer tools to diagnose styling issues",
+          "assesses": true
+        },
+        {
+          "id": "context-aware-ai-prompting",
+          "label": "Provide project-specific context when asking AI for help",
+          "assesses": true
+        }
+      ],
+      "assumes": [
+        "vscode/live-server",
+        "code-organization/css-linking",
+        "git/branch-checkout"
+      ],
+      "evidence": [
+        {
+          "kind": "before-after-screenshots",
+          "what": "Page before and after activating magic mode"
+        },
+        {
+          "kind": "devtools-screenshot",
+          "what": "Browser DevTools showing the CSS change made"
+        },
+        {
+          "kind": "ai-interaction-log",
+          "what": "AI conversation showing effective context provision"
+        }
+      ]
+    },
+    {
+      "id": "spec-3-content-customization",
+      "title": "Customize and enhance project content",
+      "teaches": [
+        {
+          "id": "semantic-html-editing",
+          "label": "Modify HTML content while maintaining semantic structure",
+          "assesses": true
+        },
+        {
+          "id": "css-custom-properties",
+          "label": "Work with CSS custom properties for consistent theming",
+          "assesses": true
+        },
+        {
+          "id": "responsive-design-testing",
+          "label": "Test layout changes across different screen sizes",
+          "assesses": true
+        }
+      ],
+      "assumes": [
+        "code-organization/file-structure",
+        "vscode/file-explorer",
+        "netlify/deploy-connect"
+      ],
+      "evidence": [
+        {
+          "kind": "content-comparison",
+          "what": "Original vs customized content showing personal touches"
+        },
+        {
+          "kind": "css-documentation",
+          "what": "Comments explaining custom property usage"
+        },
+        {
+          "kind": "responsive-screenshots",
+          "what": "Mobile and desktop views of customized content"
+        }
+      ]
+    },
+    {
+      "id": "spec-4-deployment-workflow",
+      "title": "Deploy and document project completion",
+      "teaches": [
+        {
+          "id": "git-workflow-complete",
+          "label": "Complete git workflow: add, commit, push with meaningful messages",
+          "assesses": true
+        },
+        {
+          "id": "deployment-verification",
+          "label": "Verify successful deployment and test live site functionality",
+          "assesses": true
+        },
+        {
+          "id": "technical-documentation",
+          "label": "Document technical decisions and learning outcomes",
+          "assesses": true
+        }
+      ],
+      "assumes": [
+        "git/commit-push",
+        "netlify/status-badge",
+        "readme/markdown-basics",
+        "readme/reflection-writing"
+      ],
+      "evidence": [
+        {
+          "kind": "git-history",
+          "what": "Clean commit history with descriptive messages"
+        },
+        {
+          "kind": "live-deployment",
+          "what": "Working Netlify deployment URL"
+        },
+        {
+          "kind": "readme-documentation",
+          "what": "Updated README with project reflection and technical notes"
+        }
+      ]
+    }
+  ]
+}

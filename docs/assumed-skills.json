@@ -1,0 +1,122 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-09-06",
+  "description": "Baseline skills students are expected to have before beginning tutorials",
+  "categories": [
+    {
+      "id": "git",
+      "label": "Basic Git usage and GitHub repositories",
+      "items": [
+        {
+          "id": "clone-repository",
+          "label": "Clone a GitHub repository to local machine",
+          "evidence": "local-folder"
+        },
+        {
+          "id": "branch-checkout",
+          "label": "Create and checkout branches",
+          "evidence": "git-commands"
+        },
+        {
+          "id": "commit-push",
+          "label": "Stage, commit, and push changes",
+          "evidence": "repo-activity"
+        },
+        {
+          "id": "github-navigation",
+          "label": "Navigate GitHub interface and repository structure",
+          "evidence": "screenshot-ok"
+        }
+      ]
+    },
+    {
+      "id": "netlify",
+      "label": "Netlify deployment with status badges",
+      "items": [
+        {
+          "id": "deploy-connect",
+          "label": "Connect GitHub repository to Netlify",
+          "evidence": "deployment-url"
+        },
+        {
+          "id": "status-badge",
+          "label": "Add and interpret Netlify status badges",
+          "evidence": "readme-badge"
+        },
+        {
+          "id": "deploy-settings",
+          "label": "Configure basic deployment settings",
+          "evidence": "netlify-dashboard"
+        }
+      ]
+    },
+    {
+      "id": "code-organization",
+      "label": "Code organization with separate CSS files",
+      "items": [
+        {
+          "id": "css-linking",
+          "label": "Link external CSS files to HTML",
+          "evidence": "working-styles"
+        },
+        {
+          "id": "file-structure",
+          "label": "Organize project files in logical directories",
+          "evidence": "folder-organization"
+        },
+        {
+          "id": "relative-paths",
+          "label": "Use relative paths for file references",
+          "evidence": "functioning-links"
+        }
+      ]
+    },
+    {
+      "id": "readme",
+      "label": "README files with project descriptions and learning reflections",
+      "items": [
+        {
+          "id": "markdown-basics",
+          "label": "Write basic markdown (headers, lists, links)",
+          "evidence": "formatted-readme"
+        },
+        {
+          "id": "project-description",
+          "label": "Write clear project descriptions",
+          "evidence": "descriptive-text"
+        },
+        {
+          "id": "reflection-writing",
+          "label": "Write learning reflections and documentation",
+          "evidence": "reflection-section"
+        }
+      ]
+    },
+    {
+      "id": "vscode",
+      "label": "Basic VS Code with Live Server extension",
+      "items": [
+        {
+          "id": "open-folder",
+          "label": "Open a project folder in VS Code",
+          "evidence": "screenshot-ok"
+        },
+        {
+          "id": "integrated-terminal",
+          "label": "Use VS Code integrated terminal",
+          "evidence": "terminal-screenshot"
+        },
+        {
+          "id": "live-server",
+          "label": "Install and use Live Server extension",
+          "evidence": "localhost-preview"
+        },
+        {
+          "id": "file-explorer",
+          "label": "Navigate VS Code file explorer",
+          "evidence": "file-navigation"
+        }
+      ]
+    }
+  ]
+}

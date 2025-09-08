@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+File: /docs/vscode-setup.html
+Owner: Cynthia
+Project: Abracadabra
+Created: 2025-09-06
+Duration: 15 min
+Notes: Development environment optimization for web projects
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VS Code Setup - Abracadabra Tutorial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="tutorial-styles.css">
+</head>
+<body>
+    <main class="tutorial-content">
+        <header class="tutorial-header">
+            <h1>🔧 VS Code setup</h1>
+            <p class="tutorial-subtitle">Optimizing your development environment for the Abracadabra project</p>
+        </header>
+
+        <div class="quick-access">
+            <h2>Quick access</h2>
+            <div class="quick-links">
+                <a href="#skill-expectations" class="quick-link">
+                    <span class="quick-icon">🎯</span>
+                    <span class="quick-text">Skills</span>
+                </a>
+                <a href="#tldr" class="quick-link">
+                    <span class="quick-icon">⚡</span>
+                    <span class="quick-text">TL;DR Summary</span>
+                </a>
+                <a href="#ai-helper" class="quick-link">
+                    <span class="quick-icon">🤖</span>
+                    <span class="quick-text">AI Helper</span>
+                </a>
+            </div>
+        </div>
+
+        <section id="skill-expectations" class="skill-expectations">
+            <h2>Skill expectations</h2>
+            <div class="skills-overview">
+                <div class="assumed-skills">
+                    <h3>Assumed you know</h3>
+                    <ul>
+                        <li>Basic computer usage and file management</li>
+                        <li>Software installation on your operating system</li>
+                        <li>Open project folder in VS Code</li>
+                        <li>Use VS Code file explorer</li>
+                    </ul>
+                </div>
+                <div class="focused-skills">
+                    <h3>You'll learn here</h3>
+                    <ul>
+                        <li>Install and configure essential VS Code extensions</li>
+                        <li>Optimize VS Code settings for web development</li>
+                        <li>Set up integrated terminal workflow</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <nav class="tutorial-toc">
+            <h2>Table of contents</h2>
+            <ul>
+                <li><a href="#tldr">TL;DR</a></li>
+                <li><a href="#why-vscode">Why VS Code?</a></li>
+                <li><a href="#essential-settings">Essential settings</a></li>
+                <li><a href="#extensions">Must-have extensions</a></li>
+                <li><a href="#integrated-terminal">Integrated terminal</a></li>
+                <li><a href="#workspace-tips">Workspace optimization</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+                <li><a href="#ai-helper">AI Helper</a></li>
+            </ul>
+        </nav>
+
+        <section id="tldr" class="tldr-section">
+            <h2>TL;DR</h2>
+            <div class="tldr-content">
+                <h3>Essential VS Code extensions for web development</h3>
+                <div class="concept-box">
+                    <h4>🎯 Must-have extensions</h4>
+                    <ul>
+                        <li><strong>Live Server</strong> - Real-time preview with auto-refresh</li>
+                        <li><strong>Prettier</strong> - Code formatting for consistent style</li>
+                        <li><strong>Auto Rename Tag</strong> - Keep HTML tags in sync</li>
+                        <li><strong>Bracket Pair Colorizer</strong> - Visual bracket matching</li>
+                    </ul>
+                </div>
+                
+                <h3>Key settings for Abracadabra project</h3>
+                <p>The most important setting is <code>"liveServer.settings.root": "/docs"</code> which makes the docs folder the root for Live Server, enabling your tutorial system to run properly.</p>
+                
+                <h3>Integrated terminal workflow</h3>
+                <p>Use Ctrl+` (backtick) to open VS Code's integrated terminal. This keeps everything in one window and makes npm commands more efficient. Perfect for running <code>npm install</code> and <code>npm run dev</code>.</p>
+                
+                <div class="warning-box">
+                    <h4>⚠️ Pro tip</h4>
+                    <p>Don't install too many extensions at once - start with the essentials and add more as you need them. Too many extensions can slow down VS Code.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-vscode">
+            <h2>Why VS Code?</h2>
+            
+            <div class="concept-box">
+                <h4>🎯 Key concept</h4>
+                <p><strong>Visual Studio Code</strong> is the most popular code editor for web development, and it's specifically optimized for projects like Abracadabra that use npm, JSON configuration, and integrated terminal workflows.</p>
+            </div>
+
+            <p>VS Code provides everything you need for the Abracadabra project and professional web development:</p>
+
+            <h3>Built-in features that support your learning</h3>
+            <ul>
+                <li><strong>IntelliSense</strong>: Smart code completion for package.json syntax</li>
+                <li><strong>Integrated terminal</strong>: Run npm commands without leaving the editor</li>
+                <li><strong>JSON validation</strong>: Catch package.json errors before they break your build</li>
+                <li><strong>File explorer</strong>: Navigate your project structure efficiently</li>
+                <li><strong>Live Server integration</strong>: Preview your Abracadabra transformation instantly</li>
+            </ul>
+
+            <h3>Perfect for the Abracadabra workflow</h3>
+            <ul>
+                <li><strong>Package.json editing</strong>: IntelliSense helps with npm scripts and dependency syntax</li>
+                <li><strong>Terminal integration</strong>: Run `npm run generate`, `npm run serve`, and `npm run dev` seamlessly</li>
+                <li><strong>File watching</strong>: See your generated content update in real-time</li>
+                <li><strong>Project-aware context</strong>: Understands your folder structure and configuration</li>
+            </ul>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Professional development advantage</h4>
+                <p>VS Code is used by millions of professional developers worldwide. Learning it through the Abracadabra project means you're building skills with industry-standard tools, making the transition to professional development smoother.</p>
+            </div>
+        </section>
+
+        <section id="essential-settings">
+            <h2>Essential settings</h2>
+
+            <p>VS Code works great out of the box, but these settings will optimize your experience for the Abracadabra project:</p>
+
+            <h3>Accessing settings</h3>
+            <ol>
+                <li><strong>Open settings</strong>: File → Preferences → Settings (or <code>Ctrl+,</code> / <code>Cmd+,</code>)</li>
+                <li><strong>Search for settings</strong>: Type in the search box to find specific options</li>
+                <li><strong>Toggle between UI and JSON</strong>: Click the {} icon for advanced editing</li>
+            </ol>
+
+            <h3>Recommended settings for your project</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Format on save</h4>
+                <p>Automatically cleans up your package.json and other files when you save:</p>
+                <div class="code-block-wrapper">
+                    <button class="copy-code-btn" type="button">Copy</button>
+                    <pre><code>"editor.formatOnSave": true</code></pre>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Tab size for web development</h4>
+                <p>Consistent 2-space indentation for JSON, HTML, and CSS:</p>
+                <div class="code-block-wrapper">
+                    <button class="copy-code-btn" type="button">Copy</button>
+                    <pre><code>"editor.tabSize": 2,
+"editor.insertSpaces": true</code></pre>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Auto save</h4>
+                <p>Prevents losing work when testing npm scripts:</p>
+                <div class="code-block-wrapper">
+                    <button class="copy-code-btn" type="button">Copy</button>
+                    <pre><code>"files.autoSave": "afterDelay",
+"files.autoSaveDelay": 1000</code></pre>
+                </div>
+            </div>
+
+            <div class="concept-box">
+                <h4>💡 Abracadabra project settings</h4>
+                <p>Your Abracadabra project includes a <code>.vscode/settings.json</code> file with optimized settings for the tutorial. These automatically apply when you open the project folder, ensuring consistent formatting and behavior across all project files.</p>
+            </div>
+        </section>
+
+        <section id="extensions">
+            <h2>Must-have extensions</h2>
+
+            <p>These extensions enhance your VS Code experience specifically for web development projects like Abracadabra:</p>
+
+            <h3>Installing extensions</h3>
+            <ol>
+                <li><strong>Open Extensions panel</strong>: View → Extensions (or <code>Ctrl+Shift+X</code> / <code>Cmd+Shift+X</code>)</li>
+                <li><strong>Search for extension</strong>: Type the exact name in the search box</li>
+                <li><strong>Install</strong>: Click the Install button next to the correct publisher</li>
+                <li><strong>Reload if needed</strong>: Some extensions require a window reload</li>
+            </ol>
+
+            <h3>Essential extensions for Abracadabra development</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Live Server</h4>
+                <p><strong>Publisher:</strong> Ritwick Dey</p>
+                <p>Launch a development server with live reload - essential for testing your Abracadabra transformation without running npm scripts manually.</p>
+                <p><strong>Usage:</strong> Right-click `index.html` → "Open with Live Server"</p>
+                <p><strong>Abracadabra benefit:</strong> Test port differences and see transformation behavior</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Prettier - Code formatter</h4>
+                <p><strong>Publisher:</strong> Prettier</p>
+                <p>Automatically formats your package.json, HTML, and CSS to professional standards.</p>
+                <p><strong>Abracadabra benefit:</strong> Keeps your package.json properly formatted</p>
+                <p><strong>Works with:</strong> Format on save setting for seamless experience</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Auto Rename Tag</h4>
+                <p><strong>Publisher:</strong> Jun Han</p>
+                <p>When you change an HTML opening tag, automatically updates the closing tag.</p>
+                <p><strong>Example:</strong> Change <code>&lt;div&gt;</code> to <code>&lt;section&gt;</code> and closing tag updates automatically</p>
+                <p><strong>Abracadabra benefit:</strong> Helps when modifying HTML structure</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">JSON</h4>
+                <p><strong>Built into VS Code</strong></p>
+                <p>Provides syntax highlighting, validation, and IntelliSense for JSON files.</p>
+                <p><strong>Abracadabra benefit:</strong> Essential for package.json editing with auto-complete for npm script names and dependency versions</p>
+            </div>
+
+            <h3>Helpful but optional extensions</h3>
+            <ul>
+                <li><strong>GitLens</strong>: Enhanced Git integration (if using version control)</li>
+                <li><strong>Error Lens</strong>: Inline error display for better debugging</li>
+                <li><strong>Path Intellisense</strong>: Auto-complete for file paths</li>
+                <li><strong>Thunder Client</strong>: API testing (for advanced projects)</li>
+            </ul>
+
+            <div class="warning-box">
+                <h4>⚠️ Extension strategy</h4>
+                <p>Start with just Live Server and Prettier for the Abracadabra project. Too many extensions can slow down VS Code and create distractions. Add more extensions as you identify specific needs in your development workflow.</p>
+            </div>
+        </section>
+
+        <section id="integrated-terminal">
+            <h2>Integrated terminal</h2>
+
+            <p>The integrated terminal is crucial for the Abracadabra project workflow, enabling seamless npm command execution.</p>
+
+            <h3>Opening the terminal</h3>
+            <ul>
+                <li><strong>Menu method</strong>: View → Terminal</li>
+                <li><strong>Keyboard shortcut</strong>: <code>Ctrl+`</code> (Ctrl + backtick) or <code>Cmd+`</code> on Mac</li>
+                <li><strong>Command palette</strong>: <code>Ctrl+Shift+P</code> → "Terminal: Create New Terminal"</li>
+            </ul>
+
+            <h3>Why integrated terminal is perfect for Abracadabra</h3>
+
+            <div class="concept-box">
+                <h4>🎯 Key advantages for your project</h4>
+                <ul>
+                    <li><strong>Project context</strong>: Always opens in your Abracadabra directory</li>
+                    <li><strong>Seamless workflow</strong>: Edit package.json and run npm commands without switching apps</li>
+                    <li><strong>Multiple terminals</strong>: Run `npm run serve` in one, generate content in another</li>
+                    <li><strong>Error integration</strong>: See npm errors right next to your code</li>
+                </ul>
+            </div>
+
+            <h3>Abracadabra terminal workflow</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Project setup verification</h4>
+                <p>Always verify you're in the correct directory before running npm commands:</p>
+                <div class="code-block-wrapper">
+                    <button class="copy-code-btn" type="button">Copy</button>
+                    <pre><code># Check current directory
+pwd
+
+# Should show your abracadabra-starter path
+# Example: /Users/yourname/abracadabra-starter</code></pre>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Multi-terminal setup for development</h4>
+                <p>Use multiple terminals for efficient Abracadabra development:</p>
+                <ul>
+                    <li><strong>Terminal 1</strong>: Run `npm run serve` (keeps server running)</li>
+                    <li><strong>Terminal 2</strong>: Run `npm run generate` when needed</li>
+                    <li><strong>Terminal 3</strong>: General commands (ls, git, etc.)</li>
+                </ul>
+                <p><strong>Split terminal</strong>: Click split icon or <code>Ctrl+Shift+5</code></p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Essential terminal shortcuts</h4>
+                <ul>
+                    <li><strong>Clear screen</strong>: <code>Ctrl+L</code> or type <code>clear</code></li>
+                    <li><strong>Stop running command</strong>: <code>Ctrl+C</code> (stops npm serve)</li>
+                    <li><strong>Command history</strong>: ↑ and ↓ arrows (repeat previous commands)</li>
+                    <li><strong>Auto-complete</strong>: Tab key (completes file/folder names)</li>
+                </ul>
+            </div>
+
+            <h3>Typical Abracadabra development session</h3>
+            <div class="code-block-wrapper">
+                <button class="copy-code-btn" type="button">Copy</button>
+                <pre><code># 1. Verify project location
+pwd
+
+# 2. Install dependencies (first time only)
+npm install
+
+# 3. Run complete development workflow
+npm run dev
+
+# 4. Or run commands separately:
+# Terminal 1: Generate content
+npm run generate
+
+# Terminal 2: Start development server  
+npm run serve
+
+# 5. Keep terminals open for iterative development</code></pre>
+            </div>
+        </section>
+
+        <section id="workspace-tips">
+            <h2>Workspace optimization</h2>
+
+            <p>Optimizing your VS Code workspace enhances your Abracadabra development experience.</p>
+
+            <h3>Opening your Abracadabra project correctly</h3>
+
+            <div class="concept-box">
+                <h4>🎯 Critical setup practice</h4>
+                <p>Always open the entire <code>abracadabra-starter</code> folder, not individual files. This gives VS Code proper context for IntelliSense, terminal behavior, and project-wide features.</p>
+            </div>
+
+            <h3>Recommended project setup workflow</h3>
+            <ol>
+                <li><strong>File → Open Folder</strong>: Select your complete abracadabra-starter directory</li>
+                <li><strong>Trust the workspace</strong>: Click "Yes, I trust the authors" when prompted</li>
+                <li><strong>Explore project structure</strong>: Use Explorer panel to understand file organization</li>
+                <li><strong>Open integrated terminal</strong>: <code>Ctrl+`</code> for npm command access</li>
+                <li><strong>Verify settings</strong>: Check that .vscode/settings.json is applied</li>
+            </ol>
+
+            <h3>Optimal layout for Abracadabra development</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Side-by-side editing</h4>
+                <ul>
+                    <li><strong>Split editor</strong>: <code>Ctrl+\\</code> or drag tab to side</li>
+                    <li><strong>Perfect for</strong>: package.json on left, terminal output on right</li>
+                    <li><strong>Or</strong>: index.html on left, generated content preview on right</li>
+                    <li><strong>Close split</strong>: <code>Ctrl+W</code> on empty editor</li>
+                </ul>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Panel management for development</h4>
+                <ul>
+                    <li><strong>Toggle sidebar</strong>: <code>Ctrl+B</code> (file explorer)</li>
+                    <li><strong>Toggle terminal</strong>: <code>Ctrl+`</code> (npm commands)</li>
+                    <li><strong>Maximize editor</strong>: <code>Ctrl+K Z</code> (focus mode)</li>
+                    <li><strong>Focus explorer</strong>: <code>Ctrl+Shift+E</code> (file navigation)</li>
+                </ul>
+            </div>
+
+            <h3>Efficient file navigation</h3>
+            <ul>
+                <li><strong>Quick Open</strong>: <code>Ctrl+P</code> → type "package.json" → Enter</li>
+                <li><strong>Go to Definition</strong>: <code>F12</code> (works in package.json scripts)</li>
+                <li><strong>Recent files</strong>: <code>Ctrl+Tab</code> (switch between recent edits)</li>
+                <li><strong>File history</strong>: <code>Alt+←</code> / <code>Alt+→</code> (navigation history)</li>
+            </ul>
+
+            <h3>Customizing for productivity</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Appearance optimization</h4>
+                <ul>
+                    <li><strong>Color theme</strong>: File → Preferences → Color Theme (Dark+ recommended)</li>
+                    <li><strong>Icon theme</strong>: File → Preferences → File Icon Theme (helps identify file types)</li>
+                    <li><strong>Font size</strong>: <code>Ctrl++</code> / <code>Ctrl+-</code> for comfortable coding</li>
+                    <li><strong>Minimap</strong>: Toggle in View menu for file overview</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="troubleshooting">
+            <h2>Troubleshooting</h2>
+
+            <h3>Common Abracadabra project issues</h3>
+
+            <div class="warning-box">
+                <h4>❌ Terminal not in project directory</h4>
+                <p><strong>Problem</strong>: npm commands fail because terminal opens in wrong location</p>
+                <p><strong>Solution</strong>:</p>
+                <ol>
+                    <li>Close VS Code completely</li>
+                    <li>Open project: File → Open Folder → select abracadabra-starter</li>
+                    <li>Terminal should now open in project root</li>
+                    <li>Verify with <code>pwd</code> command</li>
+                </ol>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ Package.json IntelliSense not working</h4>
+                <p><strong>Problem</strong>: No auto-complete for npm scripts or dependencies</p>
+                <p><strong>Solution</strong>:</p>
+                <ol>
+                    <li>Verify file is saved as package.json (not package.txt)</li>
+                    <li>Check for JSON syntax errors (missing commas, quotes)</li>
+                    <li>Open entire project folder, not just the file</li>
+                    <li>Restart VS Code if IntelliSense still not working</li>
+                </ol>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ Live Server not appearing in context menu</h4>
+                <p><strong>Problem</strong>: "Open with Live Server" option missing when right-clicking HTML files</p>
+                <p><strong>Solution</strong>:</p>
+                <ol>
+                    <li>Install Live Server extension (check Extensions panel)</li>
+                    <li>Right-click on index.html file specifically (not folder)</li>
+                    <li>Ensure file has .html extension</li>
+                    <li>Try Developer → Reload Window</li>
+                </ol>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ npm commands not found in terminal</h4>
+                <p><strong>Problem</strong>: "npm: command not found" or similar error</p>
+                <p><strong>Solution</strong>:</p>
+                <ol>
+                    <li>Install Node.js from <a href="https://nodejs.org">nodejs.org</a></li>
+                    <li>Restart VS Code after Node.js installation</li>
+                    <li>Verify installation: run <code>node --version</code> and <code>npm --version</code></li>
+                    <li>Ensure you're in the correct project directory</li>
+                </ol>
+            </div>
+
+            <h3>Performance optimization</h3>
+            
+            <div class="concept-box">
+                <h4>💡 VS Code performance tips</h4>
+                <ul>
+                    <li><strong>Extension management</strong>: Disable unused extensions to improve startup time</li>
+                    <li><strong>File exclusions</strong>: Exclude node_modules from search (already configured in Abracadabra)</li>
+                    <li><strong>Auto-save balance</strong>: Don't set auto-save too frequently if using slow file watchers</li>
+                    <li><strong>Memory management</strong>: Restart VS Code if it becomes sluggish during development</li>
+                </ul>
+            </div>
+
+            <h3>Getting help and learning more</h3>
+            <ul>
+                <li><strong>Command Palette</strong>: <code>Ctrl+Shift+P</code> → search for any VS Code feature</li>
+                <li><strong>Built-in help</strong>: Help → Welcome, Tips and Tricks</li>
+                <li><strong>Keyboard shortcuts</strong>: Help → Keyboard Shortcut Reference</li>
+                <li><strong>Official documentation</strong>: <a href="https://code.visualstudio.com/docs">code.visualstudio.com/docs</a></li>
+            </ul>
+        </section>
+
+        <section id="tldr-summary" class="tldr-section">
+            <h2>TL;DR - VS Code setup</h2>
+            
+            <div class="tldr-essentials">
+                <h3>Essential concepts</h3>
+                <ul class="tldr-list">
+                    <li>VS Code is the industry-standard editor optimized for npm projects like Abracadabra</li>
+                    <li>Always open the entire project folder, not individual files</li>
+                    <li>Integrated terminal provides project-aware npm command execution</li>
+                    <li>Extensions like Live Server and Prettier enhance your development workflow</li>
+                    <li>IntelliSense provides smart auto-completion for package.json editing</li>
+                </ul>
+            </div>
+            
+            <div class="tldr-commands">
+                <h3>Key shortcuts</h3>
+                <div class="command-list">
+                    <code class="tldr-command">Ctrl+` (open terminal)</code>
+                    <code class="tldr-command">Ctrl+P (quick open)</code>
+                    <code class="tldr-command">Ctrl+Shift+X (extensions)</code>
+                    <code class="tldr-command">Ctrl+, (settings)</code>
+                </div>
+            </div>
+            
+            <div class="tldr-gotchas">
+                <h3>Common issues</h3>
+                <ul class="tldr-list">
+                    <li><strong>Problem:</strong> Terminal wrong directory → <strong>Fix:</strong> Open entire project folder</li>
+                    <li><strong>Problem:</strong> npm commands not found → <strong>Fix:</strong> Install Node.js, restart VS Code</li>
+                    <li><strong>Problem:</strong> Live Server missing → <strong>Fix:</strong> Install extension, right-click HTML files</li>
+                    <li><strong>Problem:</strong> No package.json IntelliSense → <strong>Fix:</strong> Check JSON syntax, open project folder</li>
+                </ul>
+            </div>
+            
+            <div class="tldr-success">
+                <h3>You're done when</h3>
+                <ul class="success-checklist">
+                    <li>You can open your Abracadabra project folder and access integrated terminal</li>
+                    <li>Live Server extension works when right-clicking index.html</li>
+                    <li>Package.json shows IntelliSense auto-completion for scripts</li>
+                    <li>You can run npm commands directly in VS Code terminal</li>
+                    <li>Your workspace is organized for efficient Abracadabra development</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="ai-helper" class="ai-helper-section">
+            <h2>AI helper - VS Code setup</h2>
+            
+            <div class="context-guidance">
+                <h3>💡 Getting better help with context</h3>
+                <div class="context-methods">
+                    <div class="method">
+                        <strong>File-capable AI:</strong> Share your VS Code settings file path, <code>README.md</code>, and <code>.vscode/settings.json</code> so AI understands your Abracadabra project configuration and can provide project-specific guidance.
+                    </div>
+                    <div class="method">
+                        <strong>Upload-capable AI:</strong> Upload screenshots of your VS Code interface, extension panels, error messages, and your <code>.vscode/settings.json</code> for visual troubleshooting.
+                    </div>
+                    <div class="method">
+                        <strong>Text-only AI:</strong> Copy/paste your VS Code settings, extension list, error messages, and mention you're working on the Abracadabra tutorial project.
+                    </div>
+                </div>
+                <p class="context-note">Always include your VS Code version, operating system, and which specific Abracadabra tutorial step you're working on.</p>
+            </div>
+            
+            <div class="ai-categories">
+                <div class="ai-category" data-category="understanding">
+                    <h3>🧠 Understanding concepts</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="I'm working on the Abracadabra VS Code setup tutorial. Help me understand how VS Code's integrated terminal and project folder concepts support npm-based development workflows.">Copy</button>
+                            <p class="prompt-text">"I'm working on the Abracadabra VS Code setup tutorial. Help me understand how VS Code's integrated terminal and project folder concepts support npm-based development workflows."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Share your README.md and current VS Code workspace setup</p>
+                        </div>
+                        
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="Explain how VS Code extensions like Live Server and Prettier specifically benefit the Abracadabra project workflow.">Copy</button>
+                            <p class="prompt-text">"Explain how VS Code extensions like Live Server and Prettier specifically benefit the Abracadabra project workflow."</p>
+                        </div>
+                        
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="I'm learning VS Code through the Abracadabra tutorial. Help me understand why opening the entire project folder is better than opening individual files for npm projects.">Copy</button>
+                            <p class="prompt-text">"I'm learning VS Code through the Abracadabra tutorial. Help me understand why opening the entire project folder is better than opening individual files for npm projects."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Share your .vscode/settings.json and project structure</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ai-category" data-category="troubleshooting">
+                    <h3>🔧 Troubleshooting problems</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="I'm following the Abracadabra VS Code tutorial but my integrated terminal doesn't open in the project directory. Here's my setup and error details.">Copy</button>
+                            <p class="prompt-text">"I'm following the Abracadabra VS Code tutorial but my integrated terminal doesn't open in the project directory. Here's my setup and error details."</p>
+                            <p class="context-hint">⚠️ <strong>Essential:</strong> Include VS Code version, how you opened the project, and current working directory</p>
+                        </div>
+                        
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="My VS Code isn't showing IntelliSense for package.json in my Abracadabra project. Here's my current configuration.">Copy</button>
+                            <p class="prompt-text">"My VS Code isn't showing IntelliSense for package.json in my Abracadabra project. Here's my current configuration."</p>
+                            <p class="context-hint">⚠️ <strong>Essential:</strong> Share your complete package.json content and VS Code settings</p>
+                        </div>
+                        
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="Live Server extension isn't appearing in my right-click context menu for HTML files in my Abracadabra project.">Copy</button>
+                            <p class="prompt-text">"Live Server extension isn't appearing in my right-click context menu for HTML files in my Abracadabra project."</p>
+                            <p class="context-hint">⚠️ <strong>Essential:</strong> Include screenshot of Extensions panel and right-click menu, VS Code version</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ai-category" data-category="customization">
+                    <h3>⚙️ Customization and extension</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="Help me optimize my VS Code workspace layout specifically for the Abracadabra project development workflow with package.json editing and npm command execution.">Copy</button>
+                            <p class="prompt-text">"Help me optimize my VS Code workspace layout specifically for the Abracadabra project development workflow with package.json editing and npm command execution."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Share your current .vscode/settings.json and describe your typical workflow</p>
+                        </div>
+                        
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="What additional VS Code extensions would be helpful for expanding beyond the basic Abracadabra tutorial into more advanced web development?">Copy</button>
+                            <p class="prompt-text">"What additional VS Code extensions would be helpful for expanding beyond the basic Abracadabra tutorial into more advanced web development?"</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Share your current extension list and learning goals</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ai-category" data-category="integration">
+                    <h3>🔗 Connecting to other tutorials</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="I completed the VS Code setup tutorial for Abracadabra. How should these VS Code skills connect to the npm basics and package.json tutorials?">Copy</button>
+                            <p class="prompt-text">"I completed the VS Code setup tutorial for Abracadabra. How should these VS Code skills connect to the npm basics and package.json tutorials?"</p>
+                        </div>
+                        
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="How does my VS Code setup for the Abracadabra project prepare me for development server tutorials and port 3000 magic?">Copy</button>
+                            <p class="prompt-text">"How does my VS Code setup for the Abracadabra project prepare me for development server tutorials and port 3000 magic?"</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Share your understanding of the Live Server extension and integrated terminal setup</p>
+                        </div>
+                        
+                        <div class="ai-prompt">
+                            <button class="copy-prompt" type="button" data-prompt="Based on my Abracadabra VS Code configuration, what should I focus on when learning Git and version control integration?">Copy</button>
+                            <p class="prompt-text">"Based on my Abracadabra VS Code configuration, what should I focus on when learning Git and version control integration?"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="next-steps">
+            <h2>Next steps</h2>
+            <p>Now that VS Code is optimized for your Abracadabra development workflow, you're ready to:</p>
+            <ol>
+                <li>Apply your VS Code skills to <a href="npm-basics.html">npm package management</a></li>
+                <li>Practice <a href="package-json-guide.html">package.json editing with IntelliSense</a></li>
+                <li>Learn about <a href="development-servers.html">development servers and Live Server integration</a></li>
+                <li>Master <a href="npm-scripts-tutorial.html">npm scripts execution in the integrated terminal</a></li>
+            </ol>
+        </section>
+    </main>
+
+    <script src="js/tutorial-nav.js"></script>
+    <script src="js/progress-tracker.js"></script>
+    
+</body>
+</html>

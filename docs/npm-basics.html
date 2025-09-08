@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+File: /docs/npm-basics.html
+Owner: Cynthia
+Project: Abracadabra
+Created: 2025-09-06
+Duration: 20 min
+Notes: Foundation tutorial introducing npm concepts and workflows
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>npm Basics - Abracadabra Tutorial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="tutorial-styles.css">
+</head>
+<body>
+    <main class="tutorial-content">
+        <header class="tutorial-header">
+            <h1>📦 npm Basics</h1>
+            <p class="tutorial-subtitle">Understanding package management for the Abracadabra project</p>
+        </header>
+
+        <div class="quick-access">
+            <h2>Quick access</h2>
+            <div class="quick-links">
+                <a href="#skill-expectations" class="quick-link">
+                    <span class="quick-icon">🎯</span>
+                    <span class="quick-text">Skills</span>
+                </a>
+                <a href="#tldr" class="quick-link">
+                    <span class="quick-icon">⚡</span>
+                    <span class="quick-text">TL;DR Summary</span>
+                </a>
+                <a href="#ai-helper" class="quick-link">
+                    <span class="quick-icon">🤖</span>
+                    <span class="quick-text">AI Helper</span>
+                </a>
+            </div>
+        </div>
+
+        <section id="skill-expectations" class="skill-expectations">
+            <h2>Skill expectations</h2>
+            <div class="skills-overview">
+                <div class="assumed-skills">
+                    <h3>Assumed you know</h3>
+                    <ul>
+                        <li>Open project folder in VS Code</li>
+                        <li>Use VS Code integrated terminal</li>
+                        <li>Clone a GitHub repository to local machine</li>
+                        <li>Navigate VS Code file explorer</li>
+                    </ul>
+                </div>
+                <div class="focused-skills">
+                    <h3>You'll learn here</h3>
+                    <ul>
+                        <li>Execute npm install to set up project dependencies</li>
+                        <li>Read and interpret package.json scripts section</li>
+                        <li>Start development server and navigate to localhost</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <nav class="tutorial-toc">
+            <h2>Table of contents</h2>
+            <ul>
+                <li><a href="#tldr">TL;DR</a></li>
+                <li><a href="#what-is-npm">What is npm?</a></li>
+                <li><a href="#package-json">Understanding package.json</a></li>
+                <li><a href="#dependencies">Dependencies vs DevDependencies</a></li>
+                <li><a href="#npm-commands">Essential npm Commands</a></li>
+                <li><a href="#abracadabra-setup">Abracadabra Project Setup</a></li>
+                <li><a href="#common-issues">Common Issues & Solutions</a></li>
+                <li><a href="#ai-helper">AI Helper</a></li>
+            </ul>
+        </nav>
+
+        <section id="tldr" class="tldr-section">
+            <h2>TL;DR</h2>
+            <div class="tldr-content">
+                <h3>What is npm?</h3>
+                <p>npm (Node Package Manager) is the tool that powers your Abracadabra project's magic. It installs packages like <code>cowsay</code> and <code>http-server</code>, manages dependencies, and runs your automation scripts.</p>
+                
+                <h3>Essential commands for Abracadabra</h3>
+                <ul>
+                    <li><code>npm install</code> - Downloads and installs all project dependencies</li>
+                    <li><code>npm run generate</code> - Creates ASCII art content using cowsay</li>
+                    <li><code>npm run serve</code> - Starts development server on port 3000</li>
+                    <li><code>npm run dev</code> - Runs generate + serve in one command</li>
+                </ul>
+                
+                <h3>package.json role</h3>
+                <p>This file is your project's blueprint - it defines dependencies (cowsay, http-server), scripts (generate, serve, dev), and project metadata. Without it, npm doesn't know what your project needs or how to run it.</p>
+                
+                <div class="concept-box">
+                    <h4>🎯 Key takeaway</h4>
+                    <p>npm transforms your static HTML into an interactive development experience. It handles the boring setup so you can focus on building awesome projects.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="what-is-npm">
+            <h2>What is npm?</h2>
+            
+            <div class="concept-box">
+                <h4>🎯 Key concept</h4>
+                <p><strong>npm</strong> stands for "Node Package Manager" - it's the world's largest software registry and the tool that will power your Abracadabra project transformation.</p>
+            </div>
+
+            <p>Think of npm as a massive library where developers share reusable code packages. Instead of building everything from scratch, you can install and use packages that others have created and tested.</p>
+
+            <h3>What npm does for your Abracadabra project:</h3>
+            <ul>
+                <li><strong>Package installation:</strong> Download cowsay for ASCII art and http-server for development</li>
+                <li><strong>Dependency management:</strong> Track which packages your project needs</li>
+                <li><strong>Script automation:</strong> Run your generate, serve, and dev workflows</li>
+                <li><strong>Project initialization:</strong> Create the package.json that defines your project</li>
+                <li><strong>Development workflow:</strong> Enable the port 3000 magic that transforms your site</li>
+            </ul>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Abracadabra workflow</h4>
+                <p>npm enables your project's magical transformation:</p>
+                <ol>
+                    <li><code>npm init</code> creates your project foundation</li>
+                    <li><code>npm install --save-dev cowsay http-server</code> adds the tools</li>
+                    <li><code>npm run generate</code> creates ASCII art content</li>
+                    <li><code>npm run serve</code> starts the port 3000 magic</li>
+                    <li><code>npm run dev</code> does it all in one command</li>
+                </ol>
+                <p>Without npm, you'd manually download tools, configure paths, and chain commands yourself!</p>
+            </div>
+        </section>
+
+        <section id="package-json">
+            <h2>Understanding package.json</h2>
+
+            <p>The <code>package.json</code> file is your project's blueprint. For Abracadabra, it defines how the boring corporate site becomes awesome:</p>
+
+            <ul>
+                <li><strong>Project identity:</strong> Name, version, description of your Abracadabra project</li>
+                <li><strong>Development tools:</strong> cowsay and http-server dependencies</li>
+                <li><strong>Automation scripts:</strong> The commands that create and serve your transformation</li>
+                <li><strong>Workflow configuration:</strong> How npm orchestrates your development process</li>
+            </ul>
+
+            <h3>Your Abracadabra package.json structure:</h3>
+            <div class="code-block-wrapper">
+                <button type="button" class="copy-code-btn">Copy</button>
+                <pre><code>{
+  "name": "abracadabra-project",
+  "version": "1.0.0",
+  "description": "Transform boring corporate sites into awesome experiences",
+  "main": "index.js",
+  "scripts": {
+    "generate": "cowsay 'Welcome to the most AWESOME website ever!' > generated/welcome.txt && cowsay -f dragon 'I am the guardian of this amazing site!' > generated/dragon.txt && cowsay -f tux 'Development tools make coding awesome!' > generated/tux.txt && node scripts/build-content.js",
+    "serve": "http-server -p 3000 -o",
+    "dev": "npm run generate && npm run serve"
+  },
+  "keywords": ["npm", "tutorial", "cowsay", "development"],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "cowsay": "^1.6.0",
+    "http-server": "^14.1.1"
+  }
+}</code></pre>
+            </div>
+
+            <div class="concept-box">
+                <h4>🎯 JSON syntax reminder</h4>
+                <p>JSON requires double quotes around keys and string values, commas between items (but not after the last item), and proper bracket matching. VS Code will highlight syntax errors in red.</p>
+            </div>
+        </section>
+
+        <section id="dependencies">
+            <h2>Dependencies vs DevDependencies</h2>
+
+            <p>Understanding where to put packages is crucial for your Abracadabra project:</p>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Dependencies (production)</h4>
+                <p><strong>Runtime packages</strong> - what your live website needs to work:</p>
+                <ul>
+                    <li>React, Vue, Angular (if building SPAs)</li>
+                    <li>Express, Fastify (if running web servers)</li>
+                    <li>Utility libraries your site actually uses</li>
+                </ul>
+                <div class="code-block-wrapper">
+                    <button type="button" class="copy-code-btn">Copy</button>
+                    <pre><code>npm install package-name
+# Adds to "dependencies"</code></pre>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">DevDependencies (development only)</h4>
+                <p><strong>Build and development tools</strong> - what you need to create content:</p>
+                <ul>
+                    <li><strong>cowsay</strong> - Generates ASCII art during build process</li>
+                    <li><strong>http-server</strong> - Development server for port 3000 magic</li>
+                    <li>Testing frameworks, build tools, formatters</li>
+                </ul>
+                <div class="code-block-wrapper">
+                    <button type="button" class="copy-code-btn">Copy</button>
+                    <pre><code>npm install --save-dev package-name
+# Adds to "devDependencies"</code></pre>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Abracadabra classification</h4>
+                <p>Both <code>cowsay</code> and <code>http-server</code> go in <strong>devDependencies</strong> because:</p>
+                <ul>
+                    <li>cowsay generates content files during development</li>
+                    <li>http-server provides local development environment</li>
+                    <li>Neither is needed when the site runs in production</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="npm-commands">
+            <h2>Essential npm Commands</h2>
+
+            <p>Master these commands to control your Abracadabra workflow:</p>
+
+            <h3>Project initialization</h3>
+            <div class="code-block-wrapper">
+                <button type="button" class="copy-code-btn">Copy</button>
+                <pre><code># Initialize your Abracadabra project
+npm init -y</code></pre>
+            </div>
+
+            <h3>Installing development tools</h3>
+            <div class="code-block-wrapper">
+                <button type="button" class="copy-code-btn">Copy</button>
+                <pre><code># Install Abracadabra dependencies
+npm install --save-dev cowsay http-server
+
+# Install all dependencies from existing package.json
+npm install
+
+# Install specific version if needed
+npm install --save-dev cowsay@1.6.0</code></pre>
+            </div>
+
+            <h3>Running your workflows</h3>
+            <div class="code-block-wrapper">
+                <button type="button" class="copy-code-btn">Copy</button>
+                <pre><code># Generate ASCII art content files
+npm run generate
+
+# Start development server on port 3000
+npm run serve
+
+# Full workflow: generate then serve
+npm run dev</code></pre>
+            </div>
+
+            <h3>Project maintenance</h3>
+            <div class="code-block-wrapper">
+                <button type="button" class="copy-code-btn">Copy</button>
+                <pre><code># List installed packages
+npm list --depth=0
+
+# Check for outdated packages
+npm outdated
+
+# Clean npm cache if issues arise
+npm cache clean --force</code></pre>
+            </div>
+
+            <div class="concept-box">
+                <h4>🎯 Abracadabra command workflow</h4>
+                <p>Your development cycle:</p>
+                <ol>
+                    <li><code>npm run dev</code> - Start the full magical experience</li>
+                    <li>Edit your content and refresh to see changes</li>
+                    <li><code>npm run generate</code> - Regenerate content if needed</li>
+                    <li>Browser automatically opens to localhost:3000 for the transformation</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="abracadabra-setup">
+            <h2>Abracadabra project setup</h2>
+
+            <p>Follow these exact steps to set up your magical transformation project:</p>
+
+            <h3>Step 1: Navigate to your project</h3>
+            <div class="code-block-wrapper">
+                <button type="button" class="copy-code-btn">Copy</button>
+                <pre><code># Make sure you're in your Abracadabra project directory
+cd path/to/abracadabra-starter</code></pre>
+            </div>
+
+            <h3>Step 2: Initialize npm</h3>
+            <div class="code-block-wrapper">
+                <button type="button" class="copy-code-btn">Copy</button>
+                <pre><code># Create package.json with sensible defaults
+npm init -y</code></pre>
+            </div>
+            <p>This creates a basic <code>package.json</code> that you'll customize for the Abracadabra workflow.</p>
+
+            <h3>Step 3: Install the magical tools</h3>
+            <div class="code-block-wrapper">
+                <button type="button" class="copy-code-btn">Copy</button>
+                <pre><code># Install both packages as development dependencies
+npm install --save-dev cowsay http-server</code></pre>
+            </div>
+            
+            <p>Your <code>package.json</code> now includes:</p>
+            <div class="code-block-wrapper">
+                <button type="button" class="copy-code-btn">Copy</button>
+                <pre><code>"devDependencies": {
+  "cowsay": "^1.6.0",
+  "http-server": "^14.1.1"
+}</code></pre>
+            </div>
+
+            <h3>Step 4: Create the generated folder</h3>
+            <div class="code-block-wrapper">
+                <button type="button" class="copy-code-btn">Copy</button>
+                <pre><code># Create directory for generated ASCII art files
+mkdir generated</code></pre>
+            </div>
+
+            <h3>Step 5: Add automation scripts</h3>
+            <p>Edit your <code>package.json</code> to replace the default scripts section:</p>
+            <div class="code-block-wrapper">
+                <button type="button" class="copy-code-btn">Copy</button>
+                <pre><code>"scripts": {
+  "generate": "cowsay 'Welcome to the most AWESOME website ever!' > generated/welcome.txt && cowsay -f dragon 'I am the guardian of this amazing site!' > generated/dragon.txt && cowsay -f tux 'Development tools make coding awesome!' > generated/tux.txt && node scripts/build-content.js",
+  "serve": "http-server -p 3000 -o",
+  "dev": "npm run generate && npm run serve"
+}</code></pre>
+            </div>
+
+            <div class="concept-box">
+                <h4>🎯 Script breakdown</h4>
+                <ul>
+                    <li><strong>generate:</strong> Creates 3 ASCII art files + builds HTML content</li>
+                    <li><strong>serve:</strong> Starts server on port 3000 and opens browser</li>
+                    <li><strong>dev:</strong> Complete workflow - generates content then serves</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Common setup mistakes</h4>
+                <ul>
+                    <li>Forgetting <code>--save-dev</code> flag (installs in wrong dependency section)</li>
+                    <li>Missing commas between script entries in JSON</li>
+                    <li>Adding comma after the last script (JSON doesn't allow trailing commas)</li>
+                    <li>Using single quotes instead of double quotes in JSON</li>
+                    <li>Not creating the <code>generated/</code> folder first</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="common-issues">
+            <h2>Common issues & solutions</h2>
+
+            <h3>npm command not found</h3>
+            <div class="warning-box">
+                <h4>❌ Node.js not installed properly</h4>
+                <p>If <code>npm</code> command doesn't exist, Node.js isn't installed correctly.</p>
+                <p><strong>Solution:</strong> Download Node.js from <a href="https://nodejs.org">nodejs.org</a> or use a version manager like nvm.</p>
+            </div>
+
+            <h3>Permission errors</h3>
+            <div class="warning-box">
+                <h4>❌ Never use sudo with npm!</h4>
+                <p>Don't run <code>sudo npm install</code> - it creates security and ownership issues.</p>
+                <p><strong>Solution:</strong> Configure npm to use a different directory or use nvm to manage Node versions.</p>
+            </div>
+
+            <h3>Package not found errors</h3>
+            <div class="code-block-wrapper">
+                <button type="button" class="copy-code-btn">Copy</button>
+                <pre><code># Clear npm cache and retry
+npm cache clean --force
+npm install</code></pre>
+            </div>
+
+            <h3>JSON syntax errors in package.json</h3>
+            <p>VS Code highlights JSON errors in red. Common fixes:</p>
+            <ul>
+                <li>Add missing commas between properties</li>
+                <li>Remove trailing commas (last item in object/array)</li>
+                <li>Use double quotes, not single quotes</li>
+                <li>Check bracket and brace matching</li>
+                <li>Validate JSON structure</li>
+            </ul>
+
+            <h3>Generated folder or cowsay content missing</h3>
+            <div class="code-block-wrapper">
+                <button type="button" class="copy-code-btn">Copy</button>
+                <pre><code># Ensure generated folder exists
+mkdir generated
+
+# Run generation process
+npm run generate
+
+# Check that files were created
+ls generated/</code></pre>
+            </div>
+
+            <div class="concept-box">
+                <h4>💡 Understanding node_modules</h4>
+                <p>The <code>node_modules</code> folder contains all installed packages and their dependencies. It can be huge (thousands of files) but:</p>
+                <ul>
+                    <li>Never edit files in node_modules directly</li>
+                    <li>It's automatically created by <code>npm install</code></li>
+                    <li>You can delete it and run <code>npm install</code> to recreate it</li>
+                    <li>Git ignores it (it's in .gitignore) because package.json defines what to install</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="tldr-summary" class="tldr-section">
+            <h2>TL;DR - npm Basics</h2>
+            
+            <div class="tldr-essentials">
+                <h3>Essential concepts</h3>
+                <ul class="tldr-list">
+                    <li>npm manages packages and automates workflows for your Abracadabra project</li>
+                    <li>package.json defines your project, dependencies, and automation scripts</li>
+                    <li>devDependencies are development tools (cowsay, http-server) not needed in production</li>
+                    <li>npm scripts enable the generate → serve → transform workflow</li>
+                    <li>node_modules contains all installed packages (auto-generated, never edit)</li>
+                </ul>
+            </div>
+            
+            <div class="tldr-commands">
+                <h3>Key commands</h3>
+                <div class="command-list">
+                    <code class="tldr-command">npm init -y</code>
+                    <code class="tldr-command">npm install --save-dev cowsay http-server</code>
+                    <code class="tldr-command">npm run dev</code>
+                    <code class="tldr-command">npm run generate</code>
+                    <code class="tldr-command">npm run serve</code>
+                </div>
+            </div>
+            
+            <div class="tldr-gotchas">
+                <h3>Common issues</h3>
+                <ul class="tldr-list">
+                    <li><strong>Problem:</strong> JSON syntax errors → <strong>Fix:</strong> Check commas, quotes, brackets in package.json</li>
+                    <li><strong>Problem:</strong> cowsay command not found → <strong>Fix:</strong> Run npm install to install packages</li>
+                    <li><strong>Problem:</strong> Permission errors → <strong>Fix:</strong> Never use sudo, install Node properly</li>
+                    <li><strong>Problem:</strong> No generated files → <strong>Fix:</strong> Create generated/ folder, run npm run generate</li>
+                </ul>
+            </div>
+            
+            <div class="tldr-success">
+                <h3>You're done when</h3>
+                <ul class="success-checklist">
+                    <li>You have package.json with cowsay and http-server in devDependencies</li>
+                    <li>You can run npm run dev and see the transformation on localhost:3000</li>
+                    <li>You understand npm manages tools for your development workflow</li>
+                    <li>You know the difference between dependencies and devDependencies</li>
+                    <li>Your Abracadabra project generates ASCII art files and serves them</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="ai-helper" class="ai-helper-section">
+            <h2>AI helper - npm Basics</h2>
+            
+            <div class="context-guidance">
+                <h3>💡 Getting better help with context</h3>
+                <div class="context-methods">
+                    <div class="method">
+                        <strong>File-capable AI:</strong> Share your <code>package.json</code> file path, <code>README.md</code>, and <code>.github/ISSUE_TEMPLATE/spec-1-setup-tools.md</code> so AI understands this is the Abracadabra educational project with specific learning objectives.
+                    </div>
+                    <div class="method">
+                        <strong>Upload-capable AI:</strong> Upload your <code>package.json</code>, screenshots of errors, and relevant project files like <code>README.md</code> for educational context.
+                    </div>
+                    <div class="method">
+                        <strong>Text-only AI:</strong> Copy/paste your <code>package.json</code>, error messages, and mention you're working on the Abracadabra npm tutorial project.
+                    </div>
+                </div>
+                <p class="context-note">Always include your Node.js version (<code>node --version</code>), npm version (<code>npm --version</code>), and which tutorial step you're following.</p>
+            </div>
+            
+            <div class="ai-categories">
+                <div class="ai-category" data-category="understanding">
+                    <h3>🧠 Understanding concepts</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt" data-prompt="I'm working on the Abracadabra npm tutorial project. I need help understanding how package.json, node_modules, and npm install work together in this educational context.">Copy</button>
+                            <p class="prompt-text">"I'm working on the Abracadabra npm tutorial project. I need help understanding how package.json, node_modules, and npm install work together in this educational context."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Share your README.md and package.json for project-specific examples</p>
+                        </div>
+                        
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt" data-prompt="Explain why cowsay and http-server go in devDependencies for my Abracadabra project, not regular dependencies.">Copy</button>
+                            <p class="prompt-text">"Explain why cowsay and http-server go in devDependencies for my Abracadabra project, not regular dependencies."</p>
+                        </div>
+                        
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt" data-prompt="I'm learning npm through the Abracadabra tutorial. Help me understand what npm scripts are and how they connect to the project's educational goals.">Copy</button>
+                            <p class="prompt-text">"I'm learning npm through the Abracadabra tutorial. Help me understand what npm scripts are and how they connect to the project's educational goals."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Share your current npm scripts section and spec-1-setup-tools.md requirements</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ai-category" data-category="troubleshooting">
+                    <h3>🔧 Troubleshooting problems</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt" data-prompt="I'm following the Abracadabra npm tutorial and my npm install command failed. Here's my error and package.json setup.">Copy</button>
+                            <p class="prompt-text">"I'm following the Abracadabra npm tutorial and my npm install command failed. Here's my error and package.json setup."</p>
+                            <p class="context-hint">⚠️ <strong>Essential:</strong> Include complete error message, package.json, Node/npm versions, and operating system</p>
+                        </div>
+                        
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt" data-prompt="My npm run generate command says 'cowsay: command not found' but I installed it following the Abracadabra tutorial steps.">Copy</button>
+                            <p class="prompt-text">"My npm run generate command says 'cowsay: command not found' but I installed it following the Abracadabra tutorial steps."</p>
+                            <p class="context-hint">⚠️ <strong>Essential:</strong> Share your complete package.json and the exact error output</p>
+                        </div>
+                        
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt" data-prompt="My Abracadabra project's package.json has syntax errors. I followed the tutorial but something's wrong with the JSON formatting.">Copy</button>
+                            <p class="prompt-text">"My Abracadabra project's package.json has syntax errors. I followed the tutorial but something's wrong with the JSON formatting."</p>
+                            <p class="context-hint">⚠️ <strong>Essential:</strong> Paste your complete package.json content for syntax checking</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ai-category" data-category="customization">
+                    <h3>⚙️ Customization and extension</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt" data-prompt="I want to understand my Abracadabra project's dependencies better. Based on the tutorial requirements, what does each package do and why is it needed?">Copy</button>
+                            <p class="prompt-text">"I want to understand my Abracadabra project's dependencies better. Based on the tutorial requirements, what does each package do and why is it needed?"</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Share your README.md and spec-1-setup-tools.md requirements with your package.json</p>
+                        </div>
+                        
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt" data-prompt="Help me create additional npm scripts for my Abracadabra project that would be educationally useful beyond the basic generate/serve/dev workflow.">Copy</button>
+                            <p class="prompt-text">"Help me create additional npm scripts for my Abracadabra project that would be educationally useful beyond the basic generate/serve/dev workflow."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Share your current scripts section and describe what additional functionality you're interested in</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ai-category" data-category="integration">
+                    <h3>🔗 Connecting to other tutorials</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt" data-prompt="I completed the npm basics tutorial for Abracadabra. What npm concepts should I remember when I move to the package.json guide tutorial?">Copy</button>
+                            <p class="prompt-text">"I completed the npm basics tutorial for Abracadabra. What npm concepts should I remember when I move to the package.json guide tutorial?"</p>
+                        </div>
+                        
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt" data-prompt="How do the npm concepts I learned in the Abracadabra project connect to running development servers and the port 3000 magic?">Copy</button>
+                            <p class="prompt-text">"How do the npm concepts I learned in the Abracadabra project connect to running development servers and the port 3000 magic?"</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Share your js/magic.js file or describe your understanding of the port detection system</p>
+                        </div>
+                        
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt" data-prompt="Based on my Abracadabra npm setup, how should I approach the VS Code tutorial to optimize my development workflow?">Copy</button>
+                            <p class="prompt-text">"Based on my Abracadabra npm setup, how should I approach the VS Code tutorial to optimize my development workflow?"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="next-steps">
+            <h2>Next steps</h2>
+            <p>Now that you understand npm basics in the context of the Abracadabra project, you're ready to:</p>
+            <ol>
+                <li>Complete the <a href="../.github/ISSUE_TEMPLATE/spec-1-setup-tools.md">Spec 1: Setup npm tools</a> requirements</li>
+                <li>Dive deeper into <a href="package-json-guide.html">package.json structure and editing</a></li>
+                <li>Learn about <a href="development-servers.html">development servers and port 3000</a></li>
+                <li>Understand the <a href="npm-scripts-tutorial.html">npm scripts workflow automation</a></li>
+            </ol>
+        </section>
+    </main>
+
+    <script src="js/tutorial-nav.js"></script>
+    <script src="js/progress-tracker.js"></script>
+    
+</body>
+</html>

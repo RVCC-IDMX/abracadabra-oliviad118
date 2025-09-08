@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+File: /docs/development-servers.html
+Owner: Cynthia
+Project: Abracadabra
+Created: 2025-09-06
+Duration: 20 min
+Notes: Understanding development server setup and live reloading functionality
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Development Servers - Abracadabra Tutorial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@300..700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="tutorial-styles.css">
+</head>
+
+<body>
+    <main class="tutorial-content">
+        <header class="tutorial-header">
+            <h1>🚀 Development servers</h1>
+            <p class="tutorial-subtitle">Understanding local servers, ports, and the magic of live development</p>
+        </header>
+
+        <section class="quick-access">
+            <h2>Quick access</h2>
+            <div class="quick-links">
+                <a href="#skills" class="quick-link">
+                    <span class="quick-icon">🎯</span>
+                    <span class="quick-text">Skills</span>
+                </a>
+                <a href="#tldr" class="quick-link">
+                    <span class="quick-icon">⚡</span>
+                    <span class="quick-text">TL;DR Summary</span>
+                </a>
+                <a href="#ai-helper" class="quick-link">
+                    <span class="quick-icon">🤖</span>
+                    <span class="quick-text">AI Helper</span>
+                </a>
+            </div>
+        </section>
+
+        <section id="skills" class="skill-expectations">
+            <h2>Skill expectations</h2>
+            <div class="skills-grid">
+                <div class="assumed-skills">
+                    <h3>Assumed you know</h3>
+                    <ul>
+                        <li>Basic command line navigation (cd, ls)</li>
+                        <li>npm install to set up project dependencies</li>
+                        <li>VS Code integrated terminal usage</li>
+                        <li>Basic understanding of npm scripts</li>
+                    </ul>
+                </div>
+                <div class="focused-skills">
+                    <h3>You'll learn here</h3>
+                    <ul>
+                        <li>Configure and run local development servers</li>
+                        <li>Understand localhost and port concepts</li>
+                        <li>Set up live reloading workflows</li>
+                        <li>Troubleshoot common server issues</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <nav class="tutorial-toc">
+            <h2>Table of contents</h2>
+            <ul>
+                <li><a href="#tldr">TL;DR</a></li>
+                <li><a href="#what-are-dev-servers">What are development servers?</a></li>
+                <li><a href="#ports-and-localhost">Ports and localhost</a></li>
+                <li><a href="#http-server">http-server explained</a></li>
+                <li><a href="#port-3000-magic">Why port 3000 triggers magic</a></li>
+                <li><a href="#live-development">Live development workflow</a></li>
+                <li><a href="#troubleshooting">Server troubleshooting</a></li>
+                <li><a href="#ai-helper">AI Helper</a></li>
+            </ul>
+        </nav>
+
+        <section id="tldr" class="tldr-section">
+            <h2>TL;DR</h2>
+            <div class="tldr-content">
+                <h3>Development servers demystified</h3>
+                <p>Development servers are local web servers that run on your computer, allowing you to preview websites
+                    in progress. Think of them as your personal web hosting that only you can access while building
+                    projects.</p>
+
+                <h3>Critical concepts for Abracadabra</h3>
+                <div class="concept-box">
+                    <h4>🚀 The magic formula</h4>
+                    <ul>
+                        <li><code>npm run serve</code> - Starts http-server on port 3000</li>
+                        <li><code>localhost:3000</code> - Your local website address</li>
+                        <li>Live reloading - Changes appear instantly in browser</li>
+                        <li>Terminal stays open - Server runs continuously</li>
+                    </ul>
+                </div>
+
+                <h3>Why development servers matter</h3>
+                <p><strong>File:// URLs don't work</strong> for modern web features. Development servers provide proper
+                    HTTP protocol, enable JavaScript modules, handle CORS properly, and simulate real web hosting
+                    environments.</p>
+
+                <h3>Abracadabra workflow</h3>
+                <ol>
+                    <li>Open terminal in project directory</li>
+                    <li>Run <code>npm run serve</code> (starts server on port 3000)</li>
+                    <li>Open browser to <code>localhost:3000</code></li>
+                    <li>Edit files - changes appear automatically</li>
+                    <li>Keep terminal open while working</li>
+                </ol>
+
+                <div class="concept-box">
+                    <h4>⚠️ Common gotchas</h4>
+                    <ul>
+                        <li>Port already in use? Try <code>npm run serve -- --port 3001</code></li>
+                        <li>Changes not showing? Hard refresh with Ctrl+Shift+R</li>
+                        <li>Server stopped? Check terminal for error messages</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="what-are-dev-servers">
+            <h2>What are development servers?</h2>
+
+            <div class="concept-box">
+                <h4>🎯 Key concept</h4>
+                <p>A <strong>development server</strong> is a local web server that serves your website files during
+                    development, allowing you to test and preview your work in a browser.</p>
+            </div>
+
+            <p>Think of a development server as your personal web server that runs on your computer:</p>
+
+            <h3>Why you need a development server</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Without a server (problems)</h4>
+                <ul>
+                    <li><strong>File protocol issues</strong>: Opening HTML files directly shows <code>file://</code>
+                        URLs</li>
+                    <li><strong>Security restrictions</strong>: JavaScript can't access files or make requests</li>
+                    <li><strong>No HTTP headers</strong>: Missing important web browser behaviors</li>
+                    <li><strong>No live updates</strong>: Must manually refresh after every change</li>
+                </ul>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">With a development server (benefits)</h4>
+                <ul>
+                    <li><strong>Real web URLs</strong>: <code>http://localhost:3000</code> behaves like real websites
+                    </li>
+                    <li><strong>Full JavaScript access</strong>: All web APIs work correctly</li>
+                    <li><strong>Proper HTTP headers</strong>: Mimics production environment</li>
+                    <li><strong>Live reload</strong>: Automatically refresh when files change</li>
+                </ul>
+            </div>
+
+            <h3>Development vs production servers</h3>
+
+            <div class="concept-box">
+                <h4>🎯 Important distinction</h4>
+                <p><strong>Development servers</strong> are for building and testing. <strong>Production
+                        servers</strong> serve your site to real users on the internet. They have different priorities
+                    and features.</p>
+            </div>
+
+            | Feature | Development Server | Production Server |
+            |---------|-------------------|-------------------|
+            | **Speed** | Fast startup, live reload | Optimized for performance |
+            | **Security** | Relaxed, easy debugging | Strict, hardened |
+            | **Caching** | Disabled for fresh content | Aggressive for speed |
+            | **Error handling** | Detailed error messages | User-friendly error pages |
+            | **Access** | Local only (usually) | Internet accessible |
+
+            <h3>Popular development servers</h3>
+            <ul>
+                <li><strong>http-server</strong>: Simple, lightweight (used in Abracadabra)</li>
+                <li><strong>Live Server</strong>: VS Code extension with auto-refresh</li>
+                <li><strong>webpack-dev-server</strong>: Advanced features for React/modern apps</li>
+                <li><strong>Express.js</strong>: Full-featured Node.js server</li>
+                <li><strong>Python SimpleHTTPServer</strong>: Built into Python</li>
+            </ul>
+        </section>
+
+        <section id="ports-and-localhost">
+            <h2>Ports and localhost</h2>
+
+            <p>Understanding how localhost and ports work is crucial for web development.</p>
+
+            <h3>What is localhost?</h3>
+
+            <div class="concept-box">
+                <h4>🎯 Key concept</h4>
+                <p><strong>localhost</strong> is a special domain name that always refers to your own computer. It's
+                    like a shortcut saying "the computer I'm using right now."</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">localhost aliases</h4>
+                <p>All of these refer to the same thing - your computer:</p>
+                <ul>
+                    <li><code>localhost</code></li>
+                    <li><code>127.0.0.1</code> (IPv4 loopback address)</li>
+                    <li><code>::1</code> (IPv6 loopback address)</li>
+                </ul>
+            </div>
+
+            <h3>What are ports?</h3>
+
+            <div class="concept-box">
+                <h4>🎯 Port analogy</h4>
+                <p>Think of your computer as an apartment building. <strong>localhost</strong> is the building address,
+                    and <strong>ports</strong> are individual apartment numbers. Different services live in different
+                    "apartments."</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Common port numbers</h4>
+                <ul>
+                    <li><strong>Port 80</strong>: Default HTTP (regular websites)</li>
+                    <li><strong>Port 443</strong>: Default HTTPS (secure websites)</li>
+                    <li><strong>Port 3000</strong>: Popular choice for development (Abracadabra magic!)</li>
+                    <li><strong>Port 8080</strong>: Alternative HTTP port</li>
+                    <li><strong>Port 5000</strong>: Another common development port</li>
+                </ul>
+            </div>
+
+            <h3>URL structure breakdown</h3>
+            <pre><code>http://localhost:3000/index.html
+ │      │         │     │
+ │      │         │     └── File path
+ │      │         └────────── Port number
+ │      └──────────────────── Domain (your computer)
+ └─────────────────────────── Protocol (HTTP)</code></pre>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Why explicit ports in development</h4>
+                <p>In development, we specify ports like <code>:3000</code> because:</p>
+                <ul>
+                    <li><strong>Multiple projects</strong>: Run several projects simultaneously on different ports</li>
+                    <li><strong>No conflicts</strong>: Each service gets its own "apartment"</li>
+                    <li><strong>Easy switching</strong>: Change ports without affecting other services</li>
+                    <li><strong>Testing</strong>: Simulate different environments</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="http-server">
+            <h2>http-server explained</h2>
+
+            <p>Let's dive deep into the development server used in your Abracadabra project.</p>
+
+            <h3>What is http-server?</h3>
+
+            <div class="concept-box">
+                <h4>🎯 Key concept</h4>
+                <p><strong>http-server</strong> is a simple, zero-configuration command-line HTTP server built on
+                    Node.js. It's perfect for serving static websites during development.</p>
+            </div>
+
+            <h3>Abracadabra's http-server command</h3>
+            <pre><code>http-server -p 3000 -o</code></pre>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Command breakdown</h4>
+                <ul>
+                    <li><strong>http-server</strong>: The base command</li>
+                    <li><strong>-p 3000</strong>: Use port 3000 specifically</li>
+                    <li><strong>-o</strong>: Automatically open browser when server starts</li>
+                </ul>
+            </div>
+
+            <h3>Other useful http-server options</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Cache control</h4>
+                <pre><code>http-server -p 3000 -o -c-1</code></pre>
+                <p><strong>-c-1</strong>: Disable caching (always serve fresh files)</p>
+                <p><strong>Use when</strong>: Files keep showing old versions</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Specific directory</h4>
+                <pre><code>http-server ./dist -p 3000 -o</code></pre>
+                <p><strong>./dist</strong>: Serve files from dist folder instead of current directory</p>
+                <p><strong>Use when</strong>: Your built files are in a different folder</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Enable CORS</h4>
+                <pre><code>http-server -p 3000 -o --cors</code></pre>
+                <p><strong>--cors</strong>: Enable Cross-Origin Resource Sharing</p>
+                <p><strong>Use when</strong>: Making API requests from your frontend</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">HTTPS (secure)</h4>
+                <pre><code>http-server -p 3000 -o -S</code></pre>
+                <p><strong>-S</strong>: Enable HTTPS with self-signed certificate</p>
+                <p><strong>Use when</strong>: Testing features that require HTTPS</p>
+            </div>
+
+            <h3>Alternative: Live Server extension</h3>
+
+            <div class="concept-box">
+                <h4>💡 VS Code integration</h4>
+                <p>The Live Server extension provides similar functionality with automatic refresh and VS Code
+                    integration. It's great for simple HTML/CSS projects.</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Live Server vs http-server</h4>
+
+                <p><strong>Live Server (VS Code extension):</strong></p>
+                <ul>
+                    <li>✅ Automatic live reload</li>
+                    <li>✅ VS Code integration</li>
+                    <li>✅ Easy right-click to start</li>
+                    <li>❌ Less configuration options</li>
+                    <li>❌ Requires VS Code</li>
+                </ul>
+
+                <p><strong>http-server (npm package):</strong></p>
+                <ul>
+                    <li>✅ More configuration options</li>
+                    <li>✅ Works in any terminal</li>
+                    <li>✅ Scriptable in package.json</li>
+                    <li>✅ Professional workflow</li>
+                    <li>❌ Manual setup for live reload</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="port-3000-magic">
+            <h2>Why port 3000 triggers magic</h2>
+
+            <p>The Abracadabra project has a special feature: it behaves differently when served on port 3000 versus
+                other ports.</p>
+
+            <h3>The magic detection system</h3>
+
+            <div class="concept-box">
+                <h4>🎯 How the magic works</h4>
+                <p>JavaScript in your project checks <code>window.location.port</code> to see if it's running on port
+                    3000. If yes, it activates the transformation from boring ACME content to amazing Abracadabra
+                    content.</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Port detection code (simplified)</h4>
+                <pre><code>// In magic.js
+if (window.location.port === '3000') {
+    // Activate the magic transformation!
+    this.activateMagic(cowsayContent);
+} else {
+    // Show educational message about using port 3000
+    this.showPortGuidance();
+}</code></pre>
+            </div>
+
+            <h3>Why port 3000 specifically?</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Educational reasons</h4>
+                <ul>
+                    <li><strong>Muscle memory</strong>: Port 3000 is widely used in development</li>
+                    <li><strong>Real-world relevance</strong>: React, Express, and many tools default to 3000</li>
+                    <li><strong>Clear instruction following</strong>: Students must read and follow directions</li>
+                    <li><strong>Memorable magic number</strong>: Easy to remember for the "magic"</li>
+                </ul>
+            </div>
+
+            <h3>What happens on different ports</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Port 3000 behavior</h4>
+                <ul>
+                    <li>✨ <strong>Magic activated</strong>: Full Abracadabra transformation</li>
+                    <li>🎭 <strong>Countdown and effects</strong>: Dramatic reveal sequence</li>
+                    <li>🐄 <strong>Cowsay content</strong>: ASCII art displays properly</li>
+                    <li>🎨 <strong>Farm theme</strong>: Full styling and effects</li>
+                </ul>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Other ports behavior</h4>
+                <ul>
+                    <li>🏢 <strong>ACME content</strong>: Shows boring corporate website</li>
+                    <li>📚 <strong>Educational message</strong>: Explains why port 3000 is needed</li>
+                    <li>🔄 <strong>Guidance provided</strong>: Shows correct npm run serve command</li>
+                    <li>🎯 <strong>Learning opportunity</strong>: Reinforces proper development workflow</li>
+                </ul>
+            </div>
+
+            <h3>Testing different ports</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Try different ports</h4>
+                <pre><code># Test on port 8080 (shows ACME content)
+http-server -p 8080 -o
+
+# Test on port 5000 (shows ACME content)
+http-server -p 5000 -o
+
+# Back to magic port (shows Abracadabra)
+npm run serve</code></pre>
+                <p>This helps you understand how the port detection works!</p>
+            </div>
+        </section>
+
+        <section id="live-development">
+            <h2>Live development workflow</h2>
+
+            <p>Modern development relies on fast feedback loops and live updates.</p>
+
+            <h3>The development server advantage</h3>
+
+            <div class="concept-box">
+                <h4>🎯 Fast feedback loop</h4>
+                <p>The faster you can see changes, the faster you can iterate and improve. Development servers make this
+                    cycle as short as possible.</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Typical development workflow</h4>
+                <ol>
+                    <li><strong>Start server</strong>: <code>npm run serve</code></li>
+                    <li><strong>Browser opens</strong>: Automatically shows your site</li>
+                    <li><strong>Make changes</strong>: Edit HTML, CSS, or JavaScript</li>
+                    <li><strong>Save files</strong>: VS Code auto-saves (or Ctrl+S)</li>
+                    <li><strong>Refresh browser</strong>: See changes immediately</li>
+                    <li><strong>Repeat</strong>: Continue making improvements</li>
+                </ol>
+            </div>
+
+            <h3>Live reload vs hot reload</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Live reload</h4>
+                <ul>
+                    <li><strong>What it does</strong>: Automatically refreshes entire page when files change</li>
+                    <li><strong>Good for</strong>: HTML and CSS changes</li>
+                    <li><strong>Limitation</strong>: Loses current page state (form data, scroll position)</li>
+                </ul>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Hot reload</h4>
+                <ul>
+                    <li><strong>What it does</strong>: Updates only changed parts without full page refresh</li>
+                    <li><strong>Good for</strong>: JavaScript development</li>
+                    <li><strong>Advantage</strong>: Preserves application state</li>
+                    <li><strong>Used in</strong>: React, Vue, modern JavaScript frameworks</li>
+                </ul>
+            </div>
+
+            <h3>Setting up auto-refresh for Abracadabra</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Option 1: Browser extension</h4>
+                <p>Install "Live Reload" extension for Chrome/Firefox:</p>
+                <ol>
+                    <li>Install browser extension</li>
+                    <li>Click extension icon to enable</li>
+                    <li>Page auto-refreshes when files change</li>
+                </ol>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Option 2: VS Code Live Server</h4>
+                <p>Use VS Code's Live Server extension:</p>
+                <ol>
+                    <li>Install Live Server extension in VS Code</li>
+                    <li>Right-click index.html → "Open with Live Server"</li>
+                    <li>Changes auto-refresh in browser</li>
+                </ol>
+                <p><strong>Note</strong>: May not use port 3000, so magic won't activate</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Option 3: Manual refresh workflow</h4>
+                <p>Simple but effective approach:</p>
+                <ol>
+                    <li>Keep browser and VS Code side-by-side</li>
+                    <li>Save files in VS Code (Ctrl+S)</li>
+                    <li>Alt+Tab to browser, F5 to refresh</li>
+                    <li>Develops good development habits</li>
+                </ol>
+            </div>
+
+            <h3>Professional development setup</h3>
+
+            <div class="concept-box">
+                <h4>💡 Multi-monitor advantage</h4>
+                <p>Professional developers often use multiple monitors: code on one screen, browser on another. This
+                    allows instant visual feedback without window switching.</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Dual-pane development</h4>
+                <p>Single screen setup optimization:</p>
+                <ul>
+                    <li><strong>Split screen</strong>: VS Code left half, browser right half</li>
+                    <li><strong>Snap to sides</strong>: Windows key + left/right arrows</li>
+                    <li><strong>Terminal at bottom</strong>: Keep terminal visible in VS Code</li>
+                    <li><strong>File explorer closed</strong>: More room for code</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="troubleshooting">
+            <h2>Server troubleshooting</h2>
+
+            <h3>Common server problems</h3>
+
+            <div class="warning-box">
+                <h4>❌ Port already in use</h4>
+                <p><strong>Error</strong>: "EADDRINUSE: address already in use :::3000"</p>
+                <p><strong>Cause</strong>: Another process is using port 3000</p>
+                <p><strong>Solutions</strong>:</p>
+                <ol>
+                    <li><strong>Find and kill process</strong>: <code>lsof -ti:3000 | xargs kill</code> (Mac/Linux)</li>
+                    <li><strong>Use different port</strong>: <code>http-server -p 3001 -o</code></li>
+                    <li><strong>Restart terminal</strong>: Close and reopen VS Code terminal</li>
+                </ol>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ Server starts but page won't load</h4>
+                <p><strong>Problem</strong>: Server shows "Server running" but browser shows error</p>
+                <p><strong>Debugging steps</strong>:</p>
+                <ol>
+                    <li>Check server output for error messages</li>
+                    <li>Verify correct URL: <code>http://localhost:3000</code></li>
+                    <li>Try different browser</li>
+                    <li>Check firewall/antivirus settings</li>
+                </ol>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ Files not found (404 errors)</h4>
+                <p><strong>Problem</strong>: Server runs but can't find CSS, JS, or other files</p>
+                <p><strong>Solutions</strong>:</p>
+                <ul>
+                    <li>Verify server is running from correct directory</li>
+                    <li>Check file paths are relative to server root</li>
+                    <li>Ensure file names match exactly (case-sensitive)</li>
+                    <li>Look for typos in file references</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ Server won't stop</h4>
+                <p><strong>Problem</strong>: Can't stop server with Ctrl+C</p>
+                <p><strong>Solutions</strong>:</p>
+                <ol>
+                    <li>Try Ctrl+C multiple times</li>
+                    <li>Close terminal window</li>
+                    <li>Kill process: <code>pkill -f http-server</code></li>
+                    <li>Restart VS Code if needed</li>
+                </ol>
+            </div>
+
+            <h3>Server management tips</h3>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Clean server startup</h4>
+                <pre><code># Always check current directory first
+pwd
+
+# Kill any existing servers on port 3000
+lsof -ti:3000 | xargs kill
+
+# Start fresh server
+npm run serve</code></pre>
+            </div>
+
+            <div class="interactive-demo">
+                <h4 class="demo-title">Multiple terminals approach</h4>
+                <ul>
+                    <li><strong>Terminal 1</strong>: Keep server running</li>
+                    <li><strong>Terminal 2</strong>: Run other commands (npm run generate)</li>
+                    <li><strong>Benefit</strong>: Server stays running while you work</li>
+                </ul>
+            </div>
+
+            <h3>Performance considerations</h3>
+
+            <div class="concept-box">
+                <h4>💡 Server performance</h4>
+                <p>Development servers prioritize ease of use over performance. For production, you'd use optimized
+                    servers like Nginx or CDNs.</p>
+            </div>
+
+            <ul>
+                <li><strong>File watching</strong>: Too many files can slow down auto-reload</li>
+                <li><strong>Cache settings</strong>: Aggressive caching can hide changes</li>
+                <li><strong>Network access</strong>: Allowing external access can slow things down</li>
+                <li><strong>Console logging</strong>: Excessive logging impacts performance</li>
+            </ul>
+        </section>
+
+        <section class="next-steps">
+            <h2>Next steps</h2>
+            <p>Now that you understand development servers, you're ready to:</p>
+            <ol>
+                <li>Experiment with different ports and see how it affects the Abracadabra magic</li>
+                <li>Set up an efficient development workflow with auto-refresh</li>
+                <li>Learn about <a href="troubleshooting.html">troubleshooting common development issues</a></li>
+                <li>Explore <a href="evidence-guide.html">documenting your development process</a></li>
+            </ol>
+
+            <div class="concept-box">
+                <h4>🎯 Practice exercise</h4>
+                <p>Try running your Abracadabra project on ports 8080 and 5000 to see the different behaviors. This will
+                    help you understand how the port detection system works and why following the correct development
+                    workflow is important.</p>
+            </div>
+        </section>
+
+        <section id="ai-helper" class="ai-helper-section">
+            <h2>🤖 AI Helper</h2>
+            <p>Use these prompts with Claude, ChatGPT, or your preferred AI assistant to get help with development
+                server concepts and troubleshooting.</p>
+
+            <div class="ai-category">
+                <h3>💡 Getting better help with context</h3>
+                <div class="context-methods">
+                    <div class="method">
+                        <strong>File-capable AI (Claude Code, Copilot):</strong> Share your <code>package.json</code>
+                        file path, terminal output, and any server configuration files you're working with.
+                    </div>
+                    <div class="method">
+                        <strong>Upload-capable AI (ChatGPT, Claude web):</strong> Upload screenshots of error messages,
+                        your project directory structure, and browser console errors.
+                    </div>
+                    <div class="method">
+                        <strong>Text-only AI:</strong> Copy/paste exact error messages, your server commands, and
+                        describe your operating system and Node.js version.
+                    </div>
+                </div>
+                <p class="context-note">For server issues, always include your Node.js version
+                    (<code>node --version</code>), operating system, exact command that failed, and whether other
+                    processes might be using the port.</p>
+            </div>
+
+            <div class="ai-categories">
+                <div class="ai-category" data-category="understanding">
+                    <h3>🧠 Understanding concepts</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="I'm working on the Abracadabra development servers tutorial. Explain what a development server is and why I can't just open HTML files directly in the browser for modern web development.">Copy</button>
+                            <p class="prompt-text">"I'm working on the Abracadabra development servers tutorial. Explain
+                                what a development server is and why I can't just open HTML files directly in the
+                                browser for modern web development."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Mention any specific features not
+                                working with file:// URLs</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="What does localhost:3000 mean? Explain the concept of localhost and ports in simple terms for web development.">Copy</button>
+                            <p class="prompt-text">"What does localhost:3000 mean? Explain the concept of localhost and
+                                ports in simple terms for web development."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Share which ports you're trying to use
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-category" data-category="troubleshooting">
+                    <h3>🔧 Troubleshooting server issues</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="My development server won't start and I'm getting a 'port already in use' error. Walk me through troubleshooting steps and alternative solutions.">Copy</button>
+                            <p class="prompt-text">"My development server won't start and I'm getting a 'port already in
+                                use' error. Walk me through troubleshooting steps and alternative solutions."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Include the exact error message and
+                                which port you're trying to use</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="I started my server but when I make changes to my files, they don't show up in the browser. What could be wrong and how do I fix it?">Copy</button>
+                            <p class="prompt-text">"I started my server but when I make changes to my files, they don't
+                                show up in the browser. What could be wrong and how do I fix it?"</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Describe your refresh attempts and
+                                browser caching behavior</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-category" data-category="workflow">
+                    <h3>⚙️ Setting up development workflows</h3>
+                    <div class="ai-prompts">
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="Help me create an efficient web development workflow using http-server. I want to understand best practices for local development and file watching.">Copy</button>
+                            <p class="prompt-text">"Help me create an efficient web development workflow using
+                                http-server. I want to understand best practices for local development and file
+                                watching."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Share your current workflow and any
+                                automation you're trying to achieve</p>
+                        </div>
+
+                        <div class="ai-prompt">
+                            <button type="button" class="copy-prompt"
+                                data-prompt="I'm working on a project called Abracadabra that uses http-server on port 3000. Explain why the specific port matters and what 'magic' happens when I use the right setup.">Copy</button>
+                            <p class="prompt-text">"I'm working on a project called Abracadabra that uses http-server on
+                                port 3000. Explain why the specific port matters and what 'magic' happens when I use the
+                                right setup."</p>
+                            <p class="context-hint">💡 <strong>Context:</strong> Describe what happens when you use
+                                different ports</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/tutorial-nav.js"></script>
+    <script src="js/progress-tracker.js"></script>
+</body>
+
+</html>
