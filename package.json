@@ -1,0 +1,31 @@
+{
+  "name": "abracadabra-oliviad118",
+  "version": "1.0.0",
+  "description": "Welcome to your Abracadabra project! This project will teach you professional npm workflows and development automation by transforming a boring corporate website into something magical using cowsay and VS Code.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RVCC-IDMX/abracadabra-oliviad118.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/RVCC-IDMX/abracadabra-oliviad118/issues"
+  },
+  "homepage": "https://github.com/RVCC-IDMX/abracadabra-oliviad118#readme",
+  "devDependencies": {
+    "cowsay": "^1.6.0",
+    "http-server": "^14.1.1"
+  },
+  "scripts": {
+    "generate": "cowsay 'Welcome to the most AWESOME website ever!' > generated/welcome.txt && cowsay -f dragon 'I am the guardian of this amazing site!' > generated/dragon.txt && cowsay -f tux 'Professional development tools make everything better!' > generated/tux.txt && node scripts/build-content.js",
+    "serve": "http-server -p 3000 -o",
+    "dev": "npm run generate && npm run serve"
+  }
+
+}
